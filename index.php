@@ -11,11 +11,27 @@ if(isset($_POST['login'])){
     $password));
     $stmt->execute();       
     $row = $stmt->fetch(PDO::FETCH_ASSOC);   
-    if($stmt->rowCount() == 1){     
-        //$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $_SESSION['SESSION_role'] = $row['role'];
-            if( $_SESSION['SESSION_role'] == "Administrator"){
+	if($stmt->rowCount() == 1){    
+		$queryup = "UPDATE users SET logintime = logintime + 1 where email='$email'";
+		$stmt1 = $dbh ->prepare($queryup); 
+		$query2= "SELECT logintime from users where email= '$email'"; 
+		$stmt2 = $dbh ->prepare($query2); 
+		$stmt1->execute();   
+		$stmt2->execute();   
+		$_SESSION['SESSION_login'] = $row['logintime'];
+		$_SESSION['SESSION_baned'] = $row['baned'];
+		if($_SESSION['SESSION_baned'] == "y"){
+		  		echo "<script type='text/javascript' alert('Username $email Telah Di Blokir, Silahkan Hubungi Administrator');</script>";  
+				header('location: index.php');
+		}else if($_SESSION['SESSION_login'] == "3"){
+				echo "<script type='text/javascript' alert('Username $email Telah Di Blokir, Silahkan Hubungi Administrator');</script>";  
+				header('location: index.php');
+		}else if($_SESSION['SESSION_login'] <= "3"){
+			$qry = "UPDATE users SET logintime = 0 where email='$email'";
+			$stmt3 = $dbh ->prepare($qry); 
+			$stmt3->execute(); 
+		$_SESSION['SESSION_role'] = $row['role'];
+		if( $_SESSION['SESSION_role'] == "Administrator"){
 				$_SESSION['alogin']=$_POST['username'];
 				// $_SESSION['SESSION_role'];
                 header('location: admin/profile.php');
@@ -28,10 +44,11 @@ if(isset($_POST['login'])){
 		}else if($_SESSION['SESSION_role'] == "operator") {
 			$_SESSION['alogin']=$_POST['username'];
                 header('location: Operator.php');
-		}
-    } else {
-        echo "<script>alert('Username atau password anda salah');</script>";
-    }
+		}else{
+			
+		} 
+	}
+}
 }  
 
 ?>
