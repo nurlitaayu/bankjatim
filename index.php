@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include('includes/config.php');
 if(isset($_POST['login'])){
 	$email=$_POST['username'];
@@ -12,23 +13,8 @@ if(isset($_POST['login'])){
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	if($stmt->rowCount() == 1){ 
-		if($row['baned'] == "y"){
-			// Cek status blokir akun
-			echo '<script language="javascript">';
-			echo 'alert("Akun anda telah di blokir! Silahkan menghubungi administrator")';
-			echo '</script>';
-		}
-
-		if($row['status'] = 0){
-			// Cek status aktif akun
-			echo '<script language="javascript">';
-			echo 'alert("Akun anda di nonaktifkan! Silahkan menghubungi administrator")';
-			echo '</script>';
-		}
-
 		if($row['password'] !== $password){
-
-			if($row['logintime'] > 2) {
+			if($row['logintime'] == 3 || $row['baned'] == "y"){
 				// Cek jumlah kesalahan login berulang
 				$qry_banned = "UPDATE users SET baned = 'y' where email='$email'";
 				$exec_banned = $dbh->prepare($qry_banned);
@@ -36,7 +22,6 @@ if(isset($_POST['login'])){
 
 				echo '<script language="javascript">';
 				echo 'alert("Username telah di blokir karena salah 3x password! Silahkan Hubungi Administrator")';
-				echo 'window.location.reload();';
 				echo '</script>';
 			} else {
 				// Hitung kesalahan login secara berulang sebnyak 3x
@@ -46,43 +31,44 @@ if(isset($_POST['login'])){
 				$exec_attempt->execute(); 
 
 				echo '<script language="javascript">';
-				echo 'alert("Password tidak valid!)';
-				echo 'window.location.reload();';
+				echo 'alert("Password Salah !")';
 				echo '</script>';
 			}
 		} else {
-			// reset attempt login user menjadi 0, jika sebelumnya user salah password
-			$qry_update = "UPDATE users SET logintime = 0 where email='$email'";
-			$exec_update = $dbh->prepare($qry_update);
-			$exec_update->execute(); 
-
-			$_SESSION['SESSION_role'] = $row['role'];
-			if( $_SESSION['SESSION_role'] == "Administrator"){
-					$_SESSION['alogin']=$_POST['username'];
-					header('location: admin/profile.php');
-			} else if($_SESSION['SESSION_role'] == "Supervisor") {
-				$_SESSION['alogin']=$_POST['username'];
-					header('location: profile.php');
-			}else if($_SESSION['SESSION_role'] == "Viewer") {
-				$_SESSION['alogin']=$_POST['username'];
-					header('location: Viewer.php');
-			}else if($_SESSION['SESSION_role'] == "operator") {
-				$_SESSION['alogin']=$_POST['username'];
-					header('location: Operator.php');
-			}else{
+			if($row['status'] = 0){
+				// Cek status aktif akun
 				echo '<script language="javascript">';
-				echo 'alert("Role tidak dikenali!")';
-				echo 'window.location.reload();';
+				echo 'alert("Akun anda di nonaktifkan! Silahkan menghubungi administrator")';
 				echo '</script>';
+			}else{
+				// reset attempt login user menjadi 0, jika sebelumnya user salah password
+				$qry_update = "UPDATE users SET logintime = 0 where email='$email'";
+				$exec_update = $dbh->prepare($qry_update);
+				$exec_update->execute(); 
+
+				$_SESSION['SESSION_role'] = $row['role'];
+				if( $_SESSION['SESSION_role'] == "Administrator"){
+						$_SESSION['alogin']=$_POST['username'];
+						header('location: admin/profile.php');
+				} else if($_SESSION['SESSION_role'] == "Supervisor") {
+					$_SESSION['alogin']=$_POST['username'];
+						header('location: profile.php');
+				}else if($_SESSION['SESSION_role'] == "Viewer") {
+					$_SESSION['alogin']=$_POST['username'];
+						header('location: Viewer.php');
+				}else if($_SESSION['SESSION_role'] == "operator") {
+					$_SESSION['alogin']=$_POST['username'];
+						header('location: Operator.php');
+				}else{
+					echo '<script language="javascript">';
+					echo 'alert("Role tidak dikenali!")';
+					echo '</script>';
+				}
 			}
-		
 		} 
-
-
 	} else {
 		echo '<script language="javascript">';
 		echo 'alert("Akun tidak terdaftar. Silahkan register terlebih dahulu")';
-		echo 'window.location.reload();';
 		echo '</script>';
 	}
 	
