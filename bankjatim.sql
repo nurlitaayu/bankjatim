@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2022 at 05:16 AM
+-- Generation Time: Aug 20, 2022 at 04:55 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -118,7 +118,9 @@ INSERT INTO `notification` (`id`, `notiuser`, `notireciver`, `notitype`, `time`)
 (31, 'laili@email.com', 'Admin', 'Create Account', '2022-08-11 12:16:41'),
 (32, 'ayang@gmail.com', 'Admin', 'Create Account', '2022-08-11 14:12:27'),
 (33, 'bapak@gmail.com', 'Admin', 'Create Account', '2022-08-12 01:37:39'),
-(34, 'ayang@email.com', 'Admin', 'Create Account', '2022-08-16 08:26:55');
+(34, 'ayang@email.com', 'Admin', 'Create Account', '2022-08-16 08:26:55'),
+(35, '1111@gmail', 'Admin', 'Create Account', '2022-08-19 09:58:38'),
+(36, '1111@gmail', 'Admin', 'Create Account', '2022-08-19 10:03:24');
 
 -- --------------------------------------------------------
 
@@ -147,8 +149,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nip`, `name`, `email`, `password`, `role`, `mobile`, `designation`, `image`, `status`, `baned`, `logintime`) VALUES
 (20, 31231, 'Nurlita ayu', 'ayu@email.com', '0192023a7bbd73250516f069df18b500', 'Administrator', '320930232', 'eqeq', '38575-ayu.jpg', 1, 'n', 0),
-(21, 1212123, 'putri regina', 'putreg@email.com', '0192023a7bbd73250516f069df18b500', 'operator', '0832083', 'eqeq', 'img_20220328_105234.jpg', 1, 'y', 1),
-(22, 1231313, 'laili wahyu', 'laili@email.com', '0192023a7bbd73250516f069df18b500', 'Supervisor', '12312313', 'jember', 'laili-jas-resmi.png', 1, 'y', 3);
+(21, 1212123, 'putri regina', 'putreg@email.com', '0192023a7bbd73250516f069df18b500', 'operator', '0832083', 'eqeq', 'img_20220328_105234.jpg', 1, 'n', 0),
+(22, 1231313, 'laili wahyu', 'laili@email.com', '0192023a7bbd73250516f069df18b500', 'Supervisor', '12312313', 'jember', 'laili-jas-resmi.png', 1, 'y', 3),
+(24, 65238274, 'viewer', '1111@gmail', 'b59c67bf196a4758191e42f76670ceba', 'Viewer', '081280060', 'surabaya', 'polije.jpg', 1, 'n', 0);
 
 --
 -- Indexes for dumped tables
@@ -210,13 +213,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

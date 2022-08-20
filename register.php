@@ -151,14 +151,14 @@ $error="Registrasi gagal silahkan coba lagi";
                             </select>
                             </div>
 
-                            <label class="col-sm-1 control-label">Phone<span style="color:red">*</span></label>
+                            <label class="col-sm-1 control-label">No Telepon<span style="color:red">*</span></label>
                             <div class="col-sm-5">
                             <input type="number" name="mobileno" class="form-control" required>
                             </div>
                             </div>
 
                              <div class="form-group">
-                            <label class="col-sm-1 control-label">Avtar<span style="color:red">*</span></label>
+                            <label class="col-sm-1 control-label">Image<span style="color:red">*</span></label>
                             <div class="col-sm-5">
                             <div><input type="file" name="image" class="form-control"></div>
                             </div>
@@ -169,7 +169,7 @@ $error="Registrasi gagal silahkan coba lagi";
                                 </form>
                                 <br>
                                 <br>
-								<p>Already Have Account? <a href="index.php" >Signin</a></p>
+								<p>Already Have Account? <a href="index.php" >Sign In</a></p>
 							</div>
 						</div>
 				</div>

@@ -101,6 +101,13 @@ if(isset($_REQUEST['unconfirm']))
 	color:#fff;
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}.table {
+display: block;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin: 0 auto;
+  overflow-x: auto;
+  white-space: nowrap
 }
 
 		</style>
@@ -126,16 +133,19 @@ if(isset($_REQUEST['unconfirm']))
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-										<th>#</th>
+												<th>#</th>
 												<th>Image</th>
-												<th>nip</th>
+												<th>NIP</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>role</th>
-                                                <th>No telpon</th>
+                                                <th>Role</th>
+                                                <th>No Telepon</th>
                                                 <th>Alamat</th>
-                                                <th>Account</th>
-												<th>Action</th>	
+												<th>Status</th>
+												<th>Banned</th>
+                                                <th>Invalid Login</th>	
+												<th>Account</th>
+												<th>Action</th>
 										</tr>
 									</thead>
 									
@@ -159,7 +169,10 @@ foreach($results as $result)
                                             <td><?php echo htmlentities($result->email);?></td>
                                             <td><?php echo htmlentities($result->role);?></td>
                                             <td><?php echo htmlentities($result->mobile);?></td>
-                                            <td><?php echo htmlentities($result->designation);?> 
+											<td><?php echo htmlentities($result->designation);?></td>
+											<td><?php echo htmlentities($result->status);?></td>
+											<td><?php echo htmlentities($result->baned);?></td>
+											<td><?php echo htmlentities($result->logintime);?>
                                             <td>
                                             
                                             <?php if($result->status == 1)
