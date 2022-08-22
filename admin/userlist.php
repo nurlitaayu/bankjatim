@@ -49,7 +49,21 @@ if(isset($_REQUEST['unconfirm']))
 	$msg="Changes Sucessfully";
 	}
 
-
+	if(isset($_REQUEST['update']))
+	{
+		
+		$aeid=intval($_GET['update']);
+		$memstatus=1;
+		$sql = "UPDATE users SET baned=:status WHERE  id=:aeid";
+		$query = $dbh->prepare($sql);
+		$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
+		$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
+		$query -> execute();
+		$msg="Changes Sucessfully";
+	$msg="Unblocked success";
+	}else{
+		$msg="gagal";
+	}
 
 
 
@@ -101,13 +115,6 @@ if(isset($_REQUEST['unconfirm']))
 	color:#fff;
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}.table {
-display: block;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  margin: 0 auto;
-  overflow-x: auto;
-  white-space: nowrap
 }
 
 		</style>
@@ -133,19 +140,16 @@ display: block;
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-												<th>#</th>
+										<th>#</th>
 												<th>Image</th>
-												<th>NIP</th>
+												<th>nip</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Role</th>
-                                                <th>No Telepon</th>
+                                                <th>role</th>
+                                                <th>No telpon</th>
                                                 <th>Alamat</th>
-												<th>Status</th>
-												<th>Banned</th>
-                                                <th>Invalid Login</th>	
-												<th>Account</th>
-												<th>Action</th>
+                                                <th>Status</th>
+												<th>Action</th>	
 										</tr>
 									</thead>
 									
@@ -169,19 +173,17 @@ foreach($results as $result)
                                             <td><?php echo htmlentities($result->email);?></td>
                                             <td><?php echo htmlentities($result->role);?></td>
                                             <td><?php echo htmlentities($result->mobile);?></td>
-											<td><?php echo htmlentities($result->designation);?></td>
-											<td><?php echo htmlentities($result->status);?></td>
-											<td><?php echo htmlentities($result->baned);?></td>
-											<td><?php echo htmlentities($result->logintime);?>
+                                            <td><?php echo htmlentities($result->designation);?> 
+										
                                             <td>
-                                            
-                                            <?php if($result->status == 1)
+											
+                                            <?php if($result->baned == "n")
                                                     {?>
-                                                    <a href="userlist.php?confirm=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Un-Confirm the Account')">Confirmed <i class="fa fa-check-circle"></i></a> 
-                                                    <?php } else {?>
-                                                    <a href="userlist.php?unconfirm=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Confirm the Account')">Un-Confirmed <i class="fa fa-times-circle"></i></a>
-                                                    <?php } ?>
-</td>
+                                                   <div style="text-align:center; height: 20px;"><button type="submit" class="btn-success btn-block btn-sm">Actived</button></div>
+                                                    <?php } else {?>														
+													<a href="userlist.php?update=<?php echo $result->id;?>" onclick="return confirm('Do you want to unblocked');"><button class="btn-danger btn-block btn-sm"type="submit">Blocked</button></a>&nbsp;&nbsp; <?php } ?>
+													
+</td>					
                                             </td>
 											
 <td>
