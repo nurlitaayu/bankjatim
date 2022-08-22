@@ -35,10 +35,10 @@ if(isset($_POST['login'])){
 				echo '</script>';
 			}
 		} else {
-			if($row['status'] = 0){
+			if($row['status'] === 0){
 				// Cek status aktif akun
 				echo '<script language="javascript">';
-				echo 'alert("Akun anda di nonaktifkan! Silahkan menghubungi administrator")';
+				echo 'alert("Akun anda tidak diketahui atau di nonaktifkan! Silahkan menghubungi administrator")';
 				echo '</script>';
 			}else{
 				// reset attempt login user menjadi 0, jika sebelumnya user salah password
@@ -66,6 +66,7 @@ if(isset($_POST['login'])){
 				}
 			}
 		} 
+		
 	} else {
 		echo '<script language="javascript">';
 		echo 'alert("Akun tidak terdaftar. Silahkan register terlebih dahulu")';

@@ -152,6 +152,7 @@ catch(Exception $e) {
                                                 <th>Role</th>
                                                 <th>No Telepon</th>
                                                 <th>Alamat</th>
+												<th>Status</th>
 												<th>Invalid Login</th>
                                                 <th>Status Akun</th>
 												<th>Action</th>
@@ -179,6 +180,7 @@ foreach($results as $result)
                                             <td><?php echo htmlentities($result->role);?></td>
                                             <td><?php echo htmlentities($result->mobile);?></td>
                                             <td><?php echo htmlentities($result->designation);?></td>
+											<td><?php echo htmlentities($result->status);?></td>
 											<td><?php echo htmlentities($result->logintime);?>
                                             <td>
 											

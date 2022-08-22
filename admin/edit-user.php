@@ -31,13 +31,14 @@ if(isset($_POST['submit']))
 	$designation=$_POST['designation'];
 	$idedit=$_POST['idedit'];
 	$image=$_POST['image'];
+	$status=$_POST['status'];
 
 	if(move_uploaded_file($file_loc,$folder.$final_file))
 		{
 			$image=$final_file;
 		}
 
-	$sql="UPDATE users SET nip=(:nip),name=(:name), email=(:email), role=(:role), mobile=(:mobileno), designation=(:designation), Image=(:image) WHERE id=(:idedit)";
+	$sql="UPDATE users SET nip=(:nip),name=(:name), email=(:email), role=(:role), mobile=(:mobileno), designation=(:designation), Image=(:image), status=(:status) WHERE id=(:idedit)";
 	$query = $dbh->prepare($sql);
 	$query-> bindParam(':nip', $nip, PDO::PARAM_STR);
 	$query-> bindParam(':name', $name, PDO::PARAM_STR);
@@ -46,7 +47,9 @@ if(isset($_POST['submit']))
 	$query-> bindParam(':mobileno', $mobileno, PDO::PARAM_STR);
 	$query-> bindParam(':designation', $designation, PDO::PARAM_STR);
 	$query-> bindParam(':image', $image, PDO::PARAM_STR);
+	$query-> bindParam(':status', $status, PDO::PARAM_STR);
 	$query-> bindParam(':idedit', $idedit, PDO::PARAM_STR);
+	
 	$query->execute();
 	$msg="Information Updated Successfully";
 }    
@@ -162,6 +165,11 @@ if(isset($_POST['submit']))
 </div>
 </div>
 
+<label class="col-sm-2 control-label">Status<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="status" class="form-control" required value="<?php echo htmlentities($result->status);?>">
+</div>
+</div>
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Image<span style="color:red">*</span></label>

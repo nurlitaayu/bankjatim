@@ -32,7 +32,7 @@ $querynoti-> bindParam(':notireciver',$reciver, PDO::PARAM_STR);
 $querynoti-> bindParam(':notitype', $notitype, PDO::PARAM_STR);
 $querynoti->execute();    
     
-$sql ="INSERT INTO users(nip,name,email, password, role, mobile, designation, image, status) VALUES(:nip, :name, :email, :password, :role, :mobileno, :designation, :image, 1)";
+$sql ="INSERT INTO users(nip,name,email, password, role, mobile, designation, image, status) VALUES(:nip, :name, :email, :password, :role, :mobileno, :designation, :image, 0)";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':nip', $nip, PDO::PARAM_STR);
 $query-> bindParam(':name', $name, PDO::PARAM_STR);
