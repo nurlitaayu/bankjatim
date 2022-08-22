@@ -117,7 +117,7 @@ $error="Registrasi gagal silahkan coba lagi";
                             <input type="text" name="nip" class="form-control" required>
                             </div>
                             <br>
-                            <label class="col-sm-1 control-label">Name<span style="color:red">*</span></label>
+                            <label class="col-sm-1 control-label">Nama<span style="color:red">*</span></label>
                             <div class="col-sm-5">
                             <input type="text" name="name" class="form-control" required>
                             </div>

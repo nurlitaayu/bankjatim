@@ -135,7 +135,7 @@ if(isset($_POST['submit']))
 <input type="text" name="nip" class="form-control" required value="<?php echo htmlentities($result->nip);?>">
 </div>
 <br>
-<label class="col-sm-2 control-label">Name<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">Nama<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->name);?>">
 </div>
@@ -146,7 +146,7 @@ if(isset($_POST['submit']))
 </div>
 
 <div class="form-group">
-<label class="col-sm-2 control-label">role<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">Role<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <select name="role" class="form-control" required>
 							<option value="">Select</option>
@@ -156,7 +156,7 @@ if(isset($_POST['submit']))
 							<option value="Adminisitrator">Administrator</option>
                             </select>
 </div>
-<label class="col-sm-2 control-label">Designation<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">Alamat<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <input type="text" name="designation" class="form-control" required value="<?php echo htmlentities($result->designation);?>">
 </div>
@@ -169,7 +169,7 @@ if(isset($_POST['submit']))
 <input type="file" name="image" class="form-control">
 </div>
 
-<label class="col-sm-2 control-label">Mobile No.<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">No Telepon<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <input type="number" name="mobileno" class="form-control" required value="<?php echo htmlentities($result->mobile);?>">
 </div>

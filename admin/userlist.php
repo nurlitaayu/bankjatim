@@ -140,15 +140,16 @@ if(isset($_REQUEST['unconfirm']))
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
-										<th>#</th>
+												<th>#</th>
 												<th>Image</th>
-												<th>nip</th>
-                                                <th>Name</th>
+												<th>NIP</th>
+                                                <th>Nama</th>
                                                 <th>Email</th>
-                                                <th>role</th>
-                                                <th>No telpon</th>
+                                                <th>Role</th>
+                                                <th>No Telepon</th>
                                                 <th>Alamat</th>
-                                                <th>Status</th>
+												<th>Invalid Login</th>
+                                                <th>Status Akun</th>
 												<th>Action</th>	
 										</tr>
 									</thead>
@@ -173,8 +174,8 @@ foreach($results as $result)
                                             <td><?php echo htmlentities($result->email);?></td>
                                             <td><?php echo htmlentities($result->role);?></td>
                                             <td><?php echo htmlentities($result->mobile);?></td>
-                                            <td><?php echo htmlentities($result->designation);?> 
-										
+                                            <td><?php echo htmlentities($result->designation);?></td>
+											<td><?php echo htmlentities($result->logintime);?>
                                             <td>
 											
                                             <?php if($result->baned == "n")

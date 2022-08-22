@@ -146,12 +146,12 @@ if(isset($_POST['submit']))
 </div>
 
 <div class="form-group">
-	<label class="col-sm-2 control-label">Mobile<span style="color:red">*</span></label>
+	<label class="col-sm-2 control-label">No Telepon<span style="color:red">*</span></label>
 	<div class="col-sm-4">
 	<input type="text" name="mobile" class="form-control" required value="<?php echo htmlentities($result->mobile);?>">
 	</div>
 
-	<label class="col-sm-2 control-label">Designation<span style="color:red">*</span></label>
+	<label class="col-sm-2 control-label">Alamat<span style="color:red">*</span></label>
 	<div class="col-sm-4">
 	<input type="text" name="designation" class="form-control" required value="<?php echo htmlentities($result->designation);?>">
 	</div>
