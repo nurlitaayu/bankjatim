@@ -6,8 +6,10 @@ if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
 }
+
 else{
-if(isset($_GET['del']) && isset($_GET['name']))
+	try {
+	if(isset($_GET['del']) && isset($_GET['name']))
 {
 $id=$_GET['del'];
 $name=$_GET['name'];
@@ -54,17 +56,19 @@ if(isset($_REQUEST['unconfirm']))
 		
 		$aeid=intval($_GET['update']);
 		$memstatus=1;
-		$sql = "UPDATE users SET baned=:status WHERE  id=:aeid";
+		$sql = "UPDATE users SET baned=:status, logintime='0'  WHERE  id=:aeid";
 		$query = $dbh->prepare($sql);
 		$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
 		$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
 		$query -> execute();
 		$msg="Changes Sucessfully";
 	$msg="Unblocked success";
-	}else{
-		$msg="gagal";
 	}
+}
 
+catch(Exception $e) {
+		echo 'Message: ' .$e->getMessage();
+	  }
 
 
  ?>
@@ -150,7 +154,7 @@ if(isset($_REQUEST['unconfirm']))
                                                 <th>Alamat</th>
 												<th>Invalid Login</th>
                                                 <th>Status Akun</th>
-												<th>Action</th>	
+												<th>Action</th>
 										</tr>
 									</thead>
 									

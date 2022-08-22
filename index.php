@@ -21,7 +21,7 @@ if(isset($_POST['login'])){
 				$exec_banned->execute();
 
 				echo '<script language="javascript">';
-				echo 'alert("Username telah di blokir karena salah 3x password! Silahkan Hubungi Administrator")';
+				echo 'alert("Akun anda telah terblokir. Silahkan hubungi administrator!")';
 				echo '</script>';
 			} else {
 				// Hitung kesalahan login secara berulang sebnyak 3x
@@ -116,7 +116,7 @@ if(isset($_POST['login'])){
 									<button class="btn btn-danger btn-block" name="login" type="submit">LOGIN</button>
 								</form>
 								<br>
-								<p>Belum punya akun? <a href="register.php" >Signup</a></p>
+								<p>Belum punya akun? <a href="register.php" >Sign Up</a></p>
 							</div>
 						</div>
 					</div>
