@@ -174,7 +174,7 @@ catch(Exception $e) {
 									<thead>
 										<tr>
 												<th>#</th>
-												<th>Status</th>
+												<th>Status User</th>
 												<th>Image</th>
 												<th>NIP</th>
                                                 <th>Nama</th>
@@ -183,7 +183,7 @@ catch(Exception $e) {
                                                 <th>No Telepon</th>
                                                 <th>Alamat</th>
 												<th>Invalid Login</th>
-                                                <th>Status Akun</th>
+                                                <th>Status Akses</th>
 												<th>Action</th>
 										</tr>
 									</thead>
