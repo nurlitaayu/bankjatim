@@ -14,9 +14,10 @@ if(isset($_POST['login'])){
 
 	if($stmt->rowCount() == 1){ 
 		if($row['password'] !== $password){
-			if($row['logintime'] == 3 || $row['baned'] == "y"){
+			if($row['logintime'] >= 3 || $row['baned'] == "y"){
 				// Cek jumlah kesalahan login berulang
-				$qry_banned = "UPDATE users SET baned = 'y' where email='$email'";
+				$failed_attempt = $row['logintime']+1;
+				$qry_banned = "UPDATE users SET baned = 'y', logintime = $failed_attempt where email='$email'";
 				$exec_banned = $dbh->prepare($qry_banned);
 				$exec_banned->execute();
 
