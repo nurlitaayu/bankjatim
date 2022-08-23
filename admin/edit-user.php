@@ -165,11 +165,11 @@ if(isset($_POST['submit']))
 </div>
 </div>
 
-<label class="col-sm-2 control-label">Status<span style="color:red">*</span></label>
+<!-- <label class="col-sm-2 control-label">Status<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <input type="text" name="status" class="form-control" required value="<?php echo htmlentities($result->status);?>">
 </div>
-</div>
+</div> -->
 
 <div class="form-group">
 <label class="col-sm-2 control-label">Image<span style="color:red">*</span></label>

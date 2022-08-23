@@ -64,6 +64,34 @@ if(isset($_REQUEST['unconfirm']))
 		$msg="Changes Sucessfully";
 	$msg="Unblocked success";
 	}
+
+	if(isset($_REQUEST['activated']))
+	{
+		
+		$aeid=intval($_GET['activated']);
+		$memstatus=1;
+		$sql = "UPDATE users SET status=:status  WHERE  id=:aeid";
+		$query = $dbh->prepare($sql);
+		$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
+		$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
+		$query -> execute();
+		$msg="Changes Sucessfully";
+	$msg="Activated success";
+	}
+	
+	if(isset($_REQUEST['deactivated']))
+	{
+		
+		$aeid=intval($_GET['deactivated']);
+		$memstatus=0;
+		$sql = "UPDATE users SET status=:status  WHERE  id=:aeid";
+		$query = $dbh->prepare($sql);
+		$query -> bindParam(':status',$memstatus, PDO::PARAM_STR);
+		$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
+		$query -> execute();
+		$msg="Changes Sucessfully";
+	$msg="Deactivated success";
+	}
 }
 
 catch(Exception $e) {
@@ -83,6 +111,7 @@ catch(Exception $e) {
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
+	
 	
 	<title>Manage Users</title>
 
@@ -145,6 +174,7 @@ catch(Exception $e) {
 									<thead>
 										<tr>
 												<th>#</th>
+												<th>Status</th>
 												<th>Image</th>
 												<th>NIP</th>
                                                 <th>Nama</th>
@@ -152,7 +182,6 @@ catch(Exception $e) {
                                                 <th>Role</th>
                                                 <th>No Telepon</th>
                                                 <th>Alamat</th>
-												<th>Status</th>
 												<th>Invalid Login</th>
                                                 <th>Status Akun</th>
 												<th>Action</th>
@@ -173,6 +202,13 @@ foreach($results as $result)
 {				?>	
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
+											<td><?php if($result->status == '0')
+                                                    {?>
+                                                   <a href="userlist.php?activated=<?php echo $result->id;?>" onclick="return confirm('Do you want to Enable User');">&nbsp; <i class="fa fa-power-off" style="font-size:24px;color:red"></i></a>&nbsp;&nbsp;
+												   <?php } else {?>														
+													<a href="userlist.php?deactivated=<?php echo $result->id;?>" onclick="return confirm('Do you want to Disable User');">&nbsp; <i class="fa fa-power-off" style="font-size:24px;color:green"></i></a>&nbsp;&nbsp;<?php } ?>
+													</td>
+											
 											<td><img src="../images/<?php echo htmlentities($result->image);?>" style="width:50px; border-radius:50%;"/></td>
 											<td><?php echo htmlentities($result->nip);?></td>
 											<td><?php echo htmlentities($result->name);?></td>
@@ -180,7 +216,6 @@ foreach($results as $result)
                                             <td><?php echo htmlentities($result->role);?></td>
                                             <td><?php echo htmlentities($result->mobile);?></td>
                                             <td><?php echo htmlentities($result->designation);?></td>
-											<td><?php echo htmlentities($result->status);?></td>
 											<td><?php echo htmlentities($result->logintime);?>
                                             <td>
 											
