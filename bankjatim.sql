@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2022 at 04:55 AM
+-- Generation Time: Aug 23, 2022 at 02:51 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`) VALUES
-(1, 'admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500');
+(1, 'Admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500');
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,9 @@ INSERT INTO `deleteduser` (`id`, `email`, `deltime`) VALUES
 (26, '<?php echo htmlentities($result->email);?>', '2022-08-16 03:02:55'),
 (27, '<?php echo htmlentities($result->email);?>', '2022-08-16 03:25:29'),
 (28, '<?php echo htmlentities($result->email);?>', '2022-08-16 03:27:06'),
-(29, '<?php echo htmlentities($result->email);?>', '2022-08-16 03:27:57');
+(29, '<?php echo htmlentities($result->email);?>', '2022-08-16 03:27:57'),
+(30, '2222@gmail', '2022-08-22 16:01:28'),
+(31, '2222@gmail', '2022-08-22 16:02:04');
 
 -- --------------------------------------------------------
 
@@ -120,7 +122,9 @@ INSERT INTO `notification` (`id`, `notiuser`, `notireciver`, `notitype`, `time`)
 (33, 'bapak@gmail.com', 'Admin', 'Create Account', '2022-08-12 01:37:39'),
 (34, 'ayang@email.com', 'Admin', 'Create Account', '2022-08-16 08:26:55'),
 (35, '1111@gmail', 'Admin', 'Create Account', '2022-08-19 09:58:38'),
-(36, '1111@gmail', 'Admin', 'Create Account', '2022-08-19 10:03:24');
+(36, '1111@gmail', 'Admin', 'Create Account', '2022-08-19 10:03:24'),
+(37, '2222@gmail', 'Admin', 'Create Account', '2022-08-22 14:09:16'),
+(38, '2222@gmail', 'Admin', 'Create Account', '2022-08-22 16:19:43');
 
 -- --------------------------------------------------------
 
@@ -138,7 +142,7 @@ CREATE TABLE `users` (
   `mobile` varchar(50) NOT NULL,
   `designation` varchar(50) NOT NULL,
   `image` varchar(50) NOT NULL,
-  `status` int(10) NOT NULL,
+  `status` int(10) NOT NULL DEFAULT 0,
   `baned` enum('n','y') NOT NULL,
   `logintime` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -148,10 +152,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nip`, `name`, `email`, `password`, `role`, `mobile`, `designation`, `image`, `status`, `baned`, `logintime`) VALUES
-(20, 31231, 'Nurlita ayu', 'ayu@email.com', '0192023a7bbd73250516f069df18b500', 'Administrator', '320930232', 'eqeq', '38575-ayu.jpg', 1, 'n', 0),
-(21, 1212123, 'putri regina', 'putreg@email.com', '0192023a7bbd73250516f069df18b500', 'operator', '0832083', 'eqeq', 'img_20220328_105234.jpg', 1, 'n', 0),
-(22, 1231313, 'laili wahyu', 'laili@email.com', '0192023a7bbd73250516f069df18b500', 'Supervisor', '12312313', 'jember', 'laili-jas-resmi.png', 1, 'y', 3),
-(24, 65238274, 'viewer', '1111@gmail', 'b59c67bf196a4758191e42f76670ceba', 'Viewer', '081280060', 'surabaya', 'polije.jpg', 1, 'n', 0);
+(20, 31231, 'Nurlita Ayu', 'ayu@email.com', '0192023a7bbd73250516f069df18b500', 'Administrator', '320930232', 'Lumajang', '38575-ayu.jpg', 1, 'n', 0),
+(21, 1212123, 'Putri Regina', 'putreg@email.com', '0192023a7bbd73250516f069df18b500', 'operator', '0832083', 'Bondowoso', 'img_20220328_105234.jpg', 1, 'n', 0),
+(22, 1231313, 'Laili Wahyu', 'laili@email.com', '0192023a7bbd73250516f069df18b500', 'Supervisor', '12312313', 'Jember', 'laili-jas-resmi.png', 1, 'n', 0),
+(24, 65238274, 'Viewer', '1111@gmail', 'b59c67bf196a4758191e42f76670ceba', 'Viewer', '081280060', 'Surabaya', 'polije.jpg', 0, 'n', 0),
+(26, 836584, 'Viewer2', '2222@gmail', '934b535800b1cba8f96a5d72f72f1611', 'Viewer', '083754', 'Bondowoso', 'polije.jpg', 0, 'n', 0);
 
 --
 -- Indexes for dumped tables
@@ -201,7 +206,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `deleteduser`
 --
 ALTER TABLE `deleteduser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -213,13 +218,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
