@@ -36,7 +36,7 @@ if(isset($_POST['login'])){
 				echo '</script>';
 			}
 		} else {
-			if($row['status'] === 0){
+			if($row['status'] == 0){
 				// Cek status aktif akun
 				echo '<script language="javascript">';
 				echo 'alert("Akun anda tidak diketahui atau di nonaktifkan! Silahkan menghubungi administrator")';
