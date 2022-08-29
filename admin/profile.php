@@ -13,7 +13,7 @@ if(isset($_POST['submit']))
 	$name=$_POST['name'];
 	$email=$_POST['email'];
 
-	$sql="UPDATE admin SET username=(:name), email=(:email)";
+	$sql="UPDATE users SET username=(:name), email=(:email)";
 	$query = $dbh->prepare($sql);
 	$query-> bindParam(':name', $name, PDO::PARAM_STR);
 	$query-> bindParam(':email', $email, PDO::PARAM_STR);
@@ -76,7 +76,7 @@ if(isset($_POST['submit']))
 
 <body>
 <?php
-		$sql = "SELECT * from admin;";
+		$sql = "SELECT * from users;";
 		$query = $dbh -> prepare($sql);
 		$query->execute();
 		$result=$query->fetch(PDO::FETCH_OBJ);
@@ -102,7 +102,7 @@ if(isset($_POST['submit']))
 <div class="form-group">
 <label class="col-sm-2 control-label">Username<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->username);?>">
+<input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->name);?>">
 </div>
 <label class="col-sm-2 control-label">Email<span style="color:red">*</span></label>
 <div class="col-sm-4">
