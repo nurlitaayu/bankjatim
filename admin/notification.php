@@ -13,7 +13,7 @@ if(isset($_POST['submit']))
 	$name=$_POST['name'];
 	$email=$_POST['email'];
 
-	$sql="UPDATE admin SET username=(:name), email=(:email)";
+	$sql="UPDATE users SET username=(:name), email=(:email)";
 	$query = $dbh->prepare($sql);
 	$query-> bindParam(':name', $name, PDO::PARAM_STR);
 	$query-> bindParam(':email', $email, PDO::PARAM_STR);
