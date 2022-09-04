@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="stylet.css">
-    <title>Planning</title>
+    <title>GOV</title>
   </head>
   <body>
     <div class="container" style="width:120%; heigth:70%; ">

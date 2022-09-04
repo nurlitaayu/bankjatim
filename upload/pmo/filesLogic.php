@@ -1,6 +1,6 @@
 <?php
 // connect to the database
-$conn = mysqli_connect('localhost', 'root', '', 'bankjatim');
+$conn = mysqli_connect('localhost', 'root', '030101', 'bankjatim');
 
 $sql = "SELECT * FROM files where detail='pmo'";
 $result = mysqli_query($conn, $sql);

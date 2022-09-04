@@ -59,7 +59,7 @@ if(isset($_POST['login'])){
 						header('location: Viewer.php');
 				}else if($_SESSION['SESSION_role'] == "operator") {
 					$_SESSION['alogin']=$_POST['username'];
-						header('location: Operator.php');
+						header('location: operator.php');
 				}else{
 					echo '<script language="javascript">';
 					echo 'alert("Role tidak dikenali!")';
