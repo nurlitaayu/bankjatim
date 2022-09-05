@@ -2,8 +2,10 @@
 // DB credentials.
 define('DB_HOST','localhost');
 define('DB_USER','root');
-define('DB_PASS','');
+define('DB_PASS','030101');
 define('DB_NAME','bankjatim');
+
+define('HTTP_SERVER', 'http://localhost:8000/'); 
 // Establish database connection.
 try
 {

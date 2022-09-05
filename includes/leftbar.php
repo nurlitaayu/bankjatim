@@ -11,10 +11,10 @@
 			<li  class=" ts-account">
 				<a style="background:#c9c8c5; color:black;" href="#"> &nbsp;Unit Kerja</a>
 				<ul>
-					<li  ><a href="upload/index.php" style="background:#ff4040;">Planning</a></li>
-					<li ><a href="upload/pmo/index.php" style="background:#ff4040;">PMO</a></li>
-					<li ><a href="upload/gov/index.php" style="background:#ff4040;">GOV</a></li>
-					<li ><a href="upload/security/index.php" style="background:#ff4040;">Security</a></li>
+					<li  ><a href="<?php echo HTTP_SERVER ?>upload/index.php" style="background:#ff4040;">Planning</a></li>
+					<li ><a href="<?php echo HTTP_SERVER ?>upload/pmo/index.php" style="background:#ff4040;">PMO</a></li>
+					<li ><a href="<?php echo HTTP_SERVER ?>upload/gov/index.php" style="background:#ff4040;">GOV</a></li>
+					<li ><a href="<?php echo HTTP_SERVER ?>upload/security/index.php" style="background:#ff4040;">Security</a></li>
 				</ul>
 			</li>
 			</li>
