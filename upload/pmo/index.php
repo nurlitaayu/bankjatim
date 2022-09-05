@@ -50,26 +50,26 @@
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
-  <style>
+ <style>
 
 	.errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #dd3d36;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #5cb85c;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
+		padding: 10px;
+		margin: 0 0 20px 0;
+		background: #dd3d36;
+		color:#fff;
+		-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+		box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	}
+	.succWrap{
+		padding: 10px;
+		margin: 0 0 20px 0;
+		background: #5cb85c;
+		color:#fff;
+		-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+		box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	}
 
-		</style>
+</style>
 
 </head>
 
@@ -81,7 +81,7 @@
 		<div class="content-wrapper">
 			<div class="container-fluid">
 
-			
+
 									</tbody>
 								</table>
 							</div>
@@ -105,12 +105,12 @@
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
-				 $(document).ready(function () {          
-					setTimeout(function() {
-						$('.succWrap').slideUp("slow");
-					}, 3000);
-					});
-		</script>
+		$(document).ready(function () {          
+			setTimeout(function() {
+				$('.succWrap').slideUp("slow");
+			}, 3000);
+		});
+	</script>
 </body>
 </html>
 
