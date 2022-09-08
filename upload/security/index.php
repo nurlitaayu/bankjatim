@@ -1,24 +1,27 @@
-<?php include 'filesLogic.php';?>
+<?php include 'filesLogic.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="stylet.css">
-    <title>Planning</title>
-  </head>
-  <body>
-    <div class="container" style="width:120%; heigth:70%; ">
-      <div class="row">
-        <form action="index.php" method="post" enctype="multipart/form-data" >
-          <h3>Upload File Report</h3>
-          <input type="file" name="myfile"></input> <br>
-          <button type="submit" class ="btn-danger"name="save">upload</button>
-         </a>
-          <button type="submit" class ="btn-success"> <a href="downloads.php" style="color:white;">List Report</button>
-        </form>
-      </div>
-    </div>
-    <!-- <button onClick="window.location.reload();">Refresh</button> -->
-  </body>
+
+<head>
+	<link rel="stylesheet" href="stylet.css">
+	<title>.:SECURITY:.</title>
+</head>
+
+<body>
+	<div class="container" style="heigth:70%; ">
+		<div class="row">
+			<form action="index.php" method="post" enctype="multipart/form-data">
+				<h3>Upload File Report</h3>
+				<input type="file" name="myfile"></input> <br>
+				<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
+				<button type="submit" class="btn-danger" name="save">upload</button>
+				</a>
+			</form>
+		</div>
+	</div>
+	<!-- <button onClick="window.location.reload();">Refresh</button> -->
+</body>
+
 </html>
 
 <!doctype html>
@@ -31,7 +34,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-	
+
 	<title>Manage Feedback</title>
 
 	<!-- Font awesome -->
@@ -50,49 +53,48 @@
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
-  <style>
+	<style>
+		.errorWrap {
+			padding: 10px;
+			margin: 0 0 20px 0;
+			background: #dd3d36;
+			color: #fff;
+			-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+			box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+		}
 
-	.errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #dd3d36;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-	background: #5cb85c;
-	color:#fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-
-		</style>
+		.succWrap {
+			padding: 10px;
+			margin: 0 0 20px 0;
+			background: #5cb85c;
+			color: #fff;
+			-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+			box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+		}
+	</style>
 
 </head>
 
 <body>
-	<?php include('includes/header.php');?>
+	<?php include('includes/header.php'); ?>
 
 	<div class="ts-main-content">
-		<?php include('includes/leftbar.php');?>
+		<?php include('includes/leftbar.php'); ?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 
-			
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
 
+				</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-    
+	</div>
+
+	</div>
+	</div>
+	</div>
+
 
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
@@ -105,12 +107,12 @@
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
-				 $(document).ready(function () {          
-					setTimeout(function() {
-						$('.succWrap').slideUp("slow");
-					}, 3000);
-					});
-		</script>
+		$(document).ready(function() {
+			setTimeout(function() {
+				$('.succWrap').slideUp("slow");
+			}, 3000);
+		});
+	</script>
 </body>
-</html>
 
+</html>

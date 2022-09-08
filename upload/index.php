@@ -31,36 +31,13 @@
 							<form action="index.php" method="post" enctype="multipart/form-data">
 								<h3>Upload File Report</h3>
 								<div class="form-group">
-									<label for="">Unit Kerja</label>
-									<?php
-									$arr = [
-										1 => 'Planning',
-										2 => 'PMO',
-										3 => 'GOV',
-										4 => 'Security'
-									];
-									?>
-									<select name="unit_kerja" class="" id="">
-										<option value="0" selected disabled>Pilih saja</option>
-										<?php
-
-										foreach ($arr as $key => $value) : ?>
-
-											<option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-
-										<?php
-										endforeach
-										?>
-									</select>
-								</div>
-								<div class="form-group">
 									<label for="">File UPLOAD</label>
+									<input type="text" value="<?php echo $_SESSION['user_id'] ?>" name="user_id">
 									<input type="file" name="myfile"></input>
 								</div>
 								<br>
-								<button type="submit" class="btn-danger" name="save">upload</button>
+								<button type="submit" class="btn-danger btn-md" name="save">upload</button>
 								</a>
-								<button type="submit" class="btn-success"> <a href="downloads.php" style="color:white;">List Report</button>
 							</form>
 						</div>
 					</div>

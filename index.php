@@ -6,7 +6,7 @@ if (isset($_POST['login'])) {
 	$email = $_POST['username'];
 	$password = md5($_POST['password']);
 
-	$cek_email = "SELECT email, password, role, baned, status, logintime FROM users WHERE email=:username";
+	$cek_email = "SELECT id,email, password, role, baned, status, logintime FROM users WHERE email=:username";
 	$stmt = $dbh->prepare($cek_email);
 	$stmt->execute(array(':username' => $email));
 	$stmt->execute();
@@ -48,17 +48,23 @@ if (isset($_POST['login'])) {
 				$exec_update->execute();
 
 				$_SESSION['SESSION_role'] = $row['role'];
+
+
 				if ($_SESSION['SESSION_role'] == "Administrator") {
 					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
 					header('location: admin/profile.php');
 				} else if ($_SESSION['SESSION_role'] == "Supervisor") {
 					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
 					header('location: profile.php');
 				} else if ($_SESSION['SESSION_role'] == "Viewer") {
 					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
 					header('location: Viewer.php');
-				} else if ($_SESSION['SESSION_role'] == "operator") {
+				} else if ($_SESSION['SESSION_role'] == "Operator") {
 					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
 					header('location: operator.php');
 				} else {
 					echo '<script language="javascript">';

@@ -15,36 +15,17 @@ $conn = mysqli_connect('localhost', 'root', '030101', 'bankjatim');
 if (isset($_POST['save'])) { // if save button on the form is clicked
 
 
-    $unit_kerja = $_POST['unit_kerja'];
+    $unit_kerja = 2;
     $date = date('Y-m-d');
-    // $user = $_SESSION['id'];
+    $user = $_POST['user_id'];
 
 
     // name of the uploaded file
     $filename = $_FILES['myfile']['name'];
 
 
-    switch ($unit_kerja) {
-        case 1:
-            // destination of the file on the server
-            $destination = 'uploads/planning/' . $filename;
-            break;
-        case 2:
-            // destination of the file on the server
-            $destination = 'uploads/pmo/' . $filename;
-            break;
-        case 3:
-            // destination of the file on the server
-            $destination = 'uploads/gov/' . $filename;
-            break;
-        case 4:
-            // destination of the file on the server
-            $destination = 'uploads/security/' . $filename;
-            break;
-        default:
-            echo "Tidak ada tempat penyimpanan";
-            break;
-    }
+
+    $destination = $_SESSION . '/upload/uploads/pmo/' . $filename;
 
 
     // get the file extension
@@ -61,7 +42,7 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     } else {
         // move the uploaded (temporary) file to the specified destination
         if (move_uploaded_file($file, $destination)) {
-            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  NULL)";
+            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user')";
             if (mysqli_query($conn, $sql)) {
                 echo "File uploaded successfully";
             }
