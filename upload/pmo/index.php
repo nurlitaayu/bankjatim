@@ -65,7 +65,7 @@
 								<h3>Upload File Report</h3>
 								<div class="form-group">
 									<label for="">File UPLOAD</label>
-									<input type="text" value="<?php echo $_SESSION['user_id'] ?>" name="user_id">
+									<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
 									<input type="file" name="myfile"></input>
 								</div>
 								<br>

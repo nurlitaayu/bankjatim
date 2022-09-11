@@ -1,81 +1,127 @@
-<!DOCTYPE html>
-<?php
-if (isset($_GET['file_id'])) {
-    $id = $_GET['file_id'];
+<!doctype html>
+<html lang="en" class="no-js">
 
-    // fetch file to download from database
-    $sql = "SELECT * FROM files WHERE id=$id";
-    $result = mysqli_query($conn, $sql);
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="theme-color" content="#3e454c">
 
-    $file = mysqli_fetch_assoc($result);
-    $filepath = 'uploads/' . $file['name'];
+    <title>List</title>
 
-    if (file_exists($filepath)) {
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . basename($filepath));
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize('uploads/' . $file['name']));
-        
-        //This part of code prevents files from being corrupted after download
-        ob_clean();
-        flush();
-        
-        readfile('uploads/' . $file['name']);
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Sandstone Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Bootstrap Datatables -->
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+    <!-- Bootstrap social button library -->
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <!-- Bootstrap select -->
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <!-- Bootstrap file input -->
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <!-- Awesome Bootstrap checkbox -->
+    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+    <!-- Admin Stye -->
+    <link rel="stylesheet" href="css/style.css">
 
-        // Now update downloads count
-        $newCount = $file['downloads'] + 1;
-        $updateQuery = "UPDATE files SET downloads=$newCount WHERE id=$id";
-        mysqli_query($conn, $updateQuery);
-        exit;
-    }
-}
-    ?>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
+    <script type="text/javascript" src="../vendor/countries.js"></script>
+    <style>
+        .errorWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #dd3d36;
+            color: #fff;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        }
+
+        .succWrap {
+            padding: 10px;
+            margin: 0 0 20px 0;
+            background: #5cb85c;
+            color: #fff;
+            -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        }
+    </style>
+
+
+</head>
+
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-        </div>
-    </nav>
-    <div class="col-md-3"></div>
-    <div class="col-mx-6 well">
-        <h3 class="text-danger center">List Data Report</h3>
-        <hr style="border-top:1px dotted #ccc;"/>
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <form method="POST" action="">
-                <div class="form-inline">
-                    <label>Category:</label>
-                    <select class="form-control" name="category">
-                        <option value="planning">Planning</option>
-                        <option value="pmo">PMO</option>
-                        <option value="gov">Gov</option>
-                        <option value="security">Security</option>
-                    </select>
-                    <button class="btn btn-danger" name="filter">Filter</button>
-                    <button class="btn btn-success" name="reset">Reset</button>
+    <?php include('includev/header.php'); ?>
+    <div class="ts-main-content">
+        <?php include('includev/leftbar.php'); ?>
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
+                                    <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
+
+                                    <div class="panel-body">
+                                        <form method="post" class="form-horizontal" enctype="multipart/form-data">
+
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                </div>
+                                                <div class="col-sm-4 text-center">
+                                                    <img src="images/<?php echo htmlentities($result->image); ?>" style="width:200px; border-radius:50%; margin:10px;">
+                                                    <input type="file" name="image" class="form-control">
+                                                    <input type="hidden" name="image" class="form-control" value="<?php echo htmlentities($result->image); ?>">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Name<span style="color:red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->name); ?>">
+                                                </div>
+
+                                                <label class="col-sm-2 control-label">Email<span style="color:red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <input type="email" name="email" class="form-control" required value="<?php echo htmlentities($result->email); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Mobile<span style="color:red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="mobile" class="form-control" required value="<?php echo htmlentities($result->mobile); ?>">
+                                                </div>
+
+                                                <label class="col-sm-2 control-label">Designation<span style="color:red">*</span></label>
+                                                <div class="col-sm-4">
+                                                    <input type="text" name="designation" class="form-control" required value="<?php echo htmlentities($result->designation); ?>">
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="editid" class="form-control" required value="<?php echo htmlentities($result->id); ?>">
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <button class="btn btn-primary" name="submit" type="submit">Save Changes</button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <br /><br />
-            <table class="table table-bordered" style="">
-                <thead style="background-color:#ff4040; color:white;">
-                    <th>Unit kerja </th>
-                    <th>File</th>
-                    <th>Download</th>
-                </thead>
-                <tbody></tbody>
-                <thead>
-                    <?php include'filter.php'?>
-                </thead>
-            </table>
+            </div>
         </div>
     </div>
-</body>    
+</body>
+
 </html>
