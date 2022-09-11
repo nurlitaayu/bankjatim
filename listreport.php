@@ -58,63 +58,57 @@
     <div class="ts-main-content">
         <?php include('includev/leftbar.php'); ?>
         <div class="content-wrapper">
-            <div class="container-fluid">
-                <div class="row" style="margin-top: 20px;">
+            <div class="container">
+                <div class="row" style="margin-top: 10vh;">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-default">
-                                    <div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
-                                    <?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
+                            <div class="col-md-4">
+                                <?php
+                                $arr = [
+                                    1 => 'Laporan Tahunan',
+                                    2 => 'Laporan Triwulan',
+                                    3 => 'Laporan Bulanan'
+                                ];
+                                ?>
+                                <h3 class="font-weight-bold">Kategori</h3>
+                                <ul>
+                                    <li>
+                                        <?php
+                                        foreach ($arr as $key => $value) : ?>
 
-                                    <div class="panel-body">
-                                        <form method="post" class="form-horizontal" enctype="multipart/form-data">
-
-                                            <div class="form-group">
-                                                <div class="col-sm-4">
-                                                </div>
-                                                <div class="col-sm-4 text-center">
-                                                    <img src="images/<?php echo htmlentities($result->image); ?>" style="width:200px; border-radius:50%; margin:10px;">
-                                                    <input type="file" name="image" class="form-control">
-                                                    <input type="hidden" name="image" class="form-control" value="<?php echo htmlentities($result->image); ?>">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck<?= $key ?>">
+                                                <label class="form-check-label" for="defaultCheck<?= $key ?>">
+                                                    <?= $value ?>
+                                                </label>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Name<span style="color:red">*</span></label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" name="name" class="form-control" required value="<?php echo htmlentities($result->name); ?>">
-                                                </div>
-
-                                                <label class="col-sm-2 control-label">Email<span style="color:red">*</span></label>
-                                                <div class="col-sm-4">
-                                                    <input type="email" name="email" class="form-control" required value="<?php echo htmlentities($result->email); ?>">
-                                                </div>
+                                        <?php
+                                        endforeach
+                                        ?>
+                                    </li>
+                                </ul>
+                                <hr>
+                                <div class="form-group">
+                                    <label for="tanggal_p">Tanggal Publish</label>
+                                    <input type="date" class="form-control">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="list-group">
+                                    <?php
+                                    for ($i = 0; $i < 20; $i++) :  ?>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">Laporan Dewan Komisaris - Bulan Tahun</h5>
+                                                <small>Tanggal</small>
                                             </div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Mobile<span style="color:red">*</span></label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" name="mobile" class="form-control" required value="<?php echo htmlentities($result->mobile); ?>">
-                                                </div>
-
-                                                <label class="col-sm-2 control-label">Designation<span style="color:red">*</span></label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" name="designation" class="form-control" required value="<?php echo htmlentities($result->designation); ?>">
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="editid" class="form-control" required value="<?php echo htmlentities($result->id); ?>">
-
-                                            <div class="form-group">
-                                                <div class="col-sm-8 col-sm-offset-2">
-                                                    <button class="btn btn-primary" name="submit" type="submit">Save Changes</button>
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                    </div>
+                                            <small>Laporan Bulanan.</small>
+                                        </a>
+                                    <?php
+                                    endfor
+                                    ?>
                                 </div>
                             </div>
                         </div>

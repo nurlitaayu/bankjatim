@@ -2,7 +2,7 @@
 // DB credentials.
 define('DB_HOST','localhost');
 define('DB_USER','root');
-define('DB_PASS','');
+define('DB_PASS','030101');
 define('DB_NAME','bankjatim');
 // Establish database connection.
 try
@@ -13,4 +13,3 @@ catch (PDOException $e)
 {
 exit("Error: " . $e->getMessage());
 }
-?>
