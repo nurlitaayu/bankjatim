@@ -25,7 +25,7 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
 
 
 
-    $destination = $_SESSION . '/upload/uploads/pmo/' . $filename;
+    $destination = $_SERVER['DOCUMENT_ROOT'] . '/upload/uploads/planning/' . $filename;
 
 
     // get the file extension
