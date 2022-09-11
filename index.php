@@ -2,21 +2,21 @@
 session_start();
 
 include('includes/config.php');
-if(isset($_POST['login'])){
-	$email=$_POST['username'];
-	$password=md5($_POST['password']);
+if (isset($_POST['login'])) {
+	$email = $_POST['username'];
+	$password = md5($_POST['password']);
 
-	$cek_email ="SELECT email, password, role, baned, status, logintime FROM users WHERE email=:username";
+	$cek_email = "SELECT id,email, password, role, baned, status, logintime FROM users WHERE email=:username";
 	$stmt = $dbh->prepare($cek_email);
 	$stmt->execute(array(':username' => $email));
-    $stmt->execute(); 
+	$stmt->execute();
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	if($stmt->rowCount() == 1){ 
-		if($row['password'] !== $password){
-			if($row['logintime'] >= 3 || $row['baned'] == "y"){
+	if ($stmt->rowCount() == 1) {
+		if ($row['password'] !== $password) {
+			if ($row['logintime'] >= 3 || $row['baned'] == "y") {
 				// Cek jumlah kesalahan login berulang
-				$failed_attempt = $row['logintime']+1;
+				$failed_attempt = $row['logintime'] + 1;
 				$qry_banned = "UPDATE users SET baned = 'y', logintime = $failed_attempt where email='$email'";
 				$exec_banned = $dbh->prepare($qry_banned);
 				$exec_banned->execute();
@@ -26,55 +26,59 @@ if(isset($_POST['login'])){
 				echo '</script>';
 			} else {
 				// Hitung kesalahan login secara berulang sebnyak 3x
-				$failed_attempt = $row['logintime']+1;
+				$failed_attempt = $row['logintime'] + 1;
 				$query_attempt = "UPDATE users SET logintime = $failed_attempt where email='$email'";
 				$exec_attempt = $dbh->prepare($query_attempt);
-				$exec_attempt->execute(); 
+				$exec_attempt->execute();
 
 				echo '<script language="javascript">';
 				echo 'alert("Password Salah !")';
 				echo '</script>';
 			}
 		} else {
-			if($row['status'] == 0){
+			if ($row['status'] == 0) {
 				// Cek status aktif akun
 				echo '<script language="javascript">';
 				echo 'alert("Akun anda tidak diketahui atau di nonaktifkan! Silahkan menghubungi administrator")';
 				echo '</script>';
-			}else{
+			} else {
 				// reset attempt login user menjadi 0, jika sebelumnya user salah password
 				$qry_update = "UPDATE users SET logintime = 0 where email='$email'";
 				$exec_update = $dbh->prepare($qry_update);
-				$exec_update->execute(); 
+				$exec_update->execute();
 
 				$_SESSION['SESSION_role'] = $row['role'];
-				if( $_SESSION['SESSION_role'] == "Administrator"){
-						$_SESSION['alogin']=$_POST['username'];
-						header('location: admin/profile.php');
-				} else if($_SESSION['SESSION_role'] == "Supervisor") {
-					$_SESSION['alogin']=$_POST['username'];
-						header('location: profile.php');
-				}else if($_SESSION['SESSION_role'] == "Viewer") {
-					$_SESSION['alogin']=$_POST['username'];
-						header('location: Viewer.php');
-				}else if($_SESSION['SESSION_role'] == "operator") {
-					$_SESSION['alogin']=$_POST['username'];
-						header('location: operator.php');
-				}else{
+
+
+				if ($_SESSION['SESSION_role'] == "Administrator") {
+					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
+					header('location: admin/profile.php');
+				} else if ($_SESSION['SESSION_role'] == "Supervisor") {
+					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
+					header('location: profile.php');
+				} else if ($_SESSION['SESSION_role'] == "Viewer") {
+					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
+					header('location: Viewer.php');
+				} else if ($_SESSION['SESSION_role'] == "Operator") {
+					$_SESSION['alogin'] = $_POST['username'];
+					$_SESSION['user_id'] = $row['id'];
+					header('location: operator.php');
+				} else {
 					echo '<script language="javascript">';
 					echo 'alert("Role tidak dikenali!")';
 					echo '</script>';
 				}
 			}
-		} 
-		
+		}
 	} else {
 		echo '<script language="javascript">';
 		echo 'alert("Akun tidak terdaftar. Silahkan register terlebih dahulu")';
 		echo '</script>';
 	}
-	
-}  
+}
 
 ?>
 <!doctype html>
@@ -87,7 +91,7 @@ if(isset($_POST['login'])){
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	
+
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
@@ -108,7 +112,7 @@ if(isset($_POST['login'])){
 						<h1 class="text-center text-bold mt-4x">Login</h1>
 						<div class="well row pt-2x pb-3x bk-light">
 							<div class="col-md-8 col-md-offset-2">
-								<form method="post">
+								<form method="post" autocomplete="off">
 
 									<label for="" class="text-uppercase text-sm">Your Email</label>
 									<input type="email" placeholder="Email" name="username" class="form-control mb" required>
@@ -118,7 +122,7 @@ if(isset($_POST['login'])){
 									<button class="btn btn-danger btn-block" name="login" type="submit">LOGIN</button>
 								</form>
 								<br>
-								<p>Belum punya akun? <a href="register.php" >Sign Up</a></p>
+								<p>Belum punya akun? <a href="register.php">Sign Up</a></p>
 							</div>
 						</div>
 					</div>
@@ -126,7 +130,7 @@ if(isset($_POST['login'])){
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
