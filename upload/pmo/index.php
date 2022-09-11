@@ -28,6 +28,7 @@
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
+  
 	<style>
 		.errorWrap {
 			padding: 10px;
@@ -57,6 +58,7 @@
 		<?php require_once './includes/leftbar.php' ?>
 		<div class="content-wrapper">
 			<div class="container">
+
 
 				<div class="row" style="margin-top: 40px;">
 					<div class="col-md-12 col-md-offset-3">
@@ -97,6 +99,7 @@
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
+
 		$(document).ready(function() {
 			setTimeout(function() {
 				$('.succWrap').slideUp("slow");

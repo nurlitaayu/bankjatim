@@ -98,6 +98,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 		$query = $dbh->prepare($sql);
 		$query->bindParam(':email', $email, PDO::PARAM_STR);
 		$query->execute();
+
 		$result = $query->fetch(PDO::FETCH_OBJ);
 		$cnt = 1;
 		?>
@@ -162,6 +163,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 											</form>
 										</div>
+
 									</div>
 								</div>
 							</div>
