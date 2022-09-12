@@ -25,9 +25,21 @@
 		<?php include('includes/leftbar.php'); ?>
 		<div class="content-wrapper">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-12 col-md-offset-3">
-						<div class="card" style="margin-top:20vh;">
+				<div class="row" style="margin-top:10vh;">
+					<div class="col-md-4">
+						<h4>List Dokumen</h4>
+						<ul>
+							<?php
+							foreach ($files as $key => $value) : ?>
+
+								<li><?= $value['name'] ?></li>
+							<?php
+							endforeach
+							?>
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<div class="card">
 							<form action="index.php" method="post" enctype="multipart/form-data">
 								<h3>Upload File Report</h3>
 								<div class="form-group">

@@ -1,12 +1,13 @@
 <?php
 session_start();
 // connect to the database
-$conn = mysqli_connect('localhost', 'root', '', 'bankjatim');
+$conn = mysqli_connect('localhost', 'root', '030101', 'bankjatim');
 
-// $sql = "SELECT * FROM files where unit_kerja='planning'";
-// $result = mysqli_query($conn, $sql);
+$sql = "SELECT * FROM files where unit_kerja=1 ORDER BY `files`.`id` DESC LIMIT 10";
+$result = mysqli_query($conn, $sql);
 
-// $files = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$files = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 
 
 // $user = session_name();
