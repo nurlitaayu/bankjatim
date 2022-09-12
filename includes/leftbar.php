@@ -29,7 +29,7 @@
 					break;
 				case 'Supervisor': ?>
 					<ul>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/s_planning.php" style="background:#ff4040;">Planningss</a></li>
+						<li><a href="<?php echo HTTP_SERVER ?>upload/s_planning.php" style="background:#ff4040;">Planning</a></li>
 						<li><a href="<?php echo HTTP_SERVER ?>upload/pmo/s_pmo.php" style="background:#ff4040;">PMOss</a></li>
 						<li><a href="<?php echo HTTP_SERVER ?>supervisor/gov.php" style="background:#ff4040;">GOV</a></li>
 						<li><a href="<?php echo HTTP_SERVER ?>supervisor/security.php" style="background:#ff4040;">Security</a></li>

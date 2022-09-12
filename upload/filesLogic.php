@@ -1,9 +1,9 @@
 <?php
 session_start();
 // connect to the database
-$conn = mysqli_connect('localhost', 'root', '030101', 'bankjatim');
+$conn = mysqli_connect('localhost', 'root', '', 'bankjatim');
 
-$sql = "SELECT * FROM files where unit_kerja=1 ORDER BY `files`.`id` DESC LIMIT 10";
+$sql = "SELECT * FROM files ORDER BY `files`.`id` DESC LIMIT 10";
 $result = mysqli_query($conn, $sql);
 
 $files = mysqli_fetch_all($result, MYSQLI_ASSOC);
