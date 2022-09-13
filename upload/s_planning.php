@@ -1,4 +1,9 @@
 <?php include 'filesLogic.php'; ?>
+
+<?php 
+$category = $_GET['category'] ?: [];
+
+?>
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -37,8 +42,40 @@
         <?php require_once './includes/leftbar.php' ?>
         <div class="content-wrapper">
             <div class="container">
+                <h1>Laporan Unit Kerja</h1>
                 <div class="row" style="margin-top: 40px;">
-                    <div class="col-lg-12">
+                    <div class="col-lg-4">
+                        <form action="" method="get">
+                                                        <div>
+                                <!-- Planning -->
+                                <input type="checkbox" name="category[]" value="1" id="planning" <?php echo in_array(1, $category) == true ? "checked" : '' ?> >
+                                <label for="planning">Planning</label>
+                            </div>
+
+                            <div>
+                                <!-- Pmo -->
+                                <input type="checkbox" name="category[]" value="2" id="pmo" <?= in_array(2, $category) ? 'checked' : '' ?>>
+                                <label for="pmo">PMO</label>
+                            </div>
+
+                            <div>
+                                <!-- Gov -->
+                                <input type="checkbox" name="category[]" value="3" id="gov" <?= in_array(3, $category) ? 'checked' : '' ?>>
+                                <label for="gov">Gov</label>
+                            </div>
+
+                            <div>
+                                <!-- Security -->
+                                <input type="checkbox" name="category[]" value="4" id="security" <?= in_array(4, $category) ? 'checked' : '' ?>>
+                                <label for="security">Security</label>
+                            </div>
+
+
+                            <button type="submit">Cari</button>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-8">
                         <table class="table table-hover table-border" id="dataTable">
                             <thead>
                                 <tr>
@@ -74,7 +111,7 @@
                 serverSide: true,
                 ordering: true, // Set true agar bisa di sorting
                 ajax: {
-                    url: "supervisor/get_planning.php",
+                    url: "supervisor/get_planning.php?category=<?= join(',', $category) ?>",
                     type: "GET"
                 }
             });

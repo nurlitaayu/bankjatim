@@ -1,12 +1,16 @@
 <?php
 
 // DB table to use
+
+$category = $_GET['category'] ?: join(',', [1, 2, 3, 4]);
+
 $table = <<<EOT
 (
     SELECT 
         f.id,
         f.name,
         f.tanggal,
+        f.unit_kerja as category,
         u.name as user_name
     FROM files f
     LEFT JOIN users u ON f.user_id = u.id
@@ -29,10 +33,10 @@ $columns = array(
     array('db' => 'id', 'dt' => 4, 'formatter' => function ($plan, $row) {
         return '
             <div style="display: flex; ">
-                <form action="change_plan.php?acc_id='. $plan .'" method="post">
+                <form action="change_plan.php?acc_id=' . $plan . '" method="post">
                     <button>Accept</button>
                 </form>
-                <form action="change.plan.php?reject_id='.$plan.'" method="post">
+                <form action="change.plan.php?reject_id=' . $plan . '" method="post">
                     <button>Reject</button>
                 </form>
             </div>
@@ -58,5 +62,5 @@ $sql_details = array(
 require('../ssp.class.php');
 
 echo json_encode(
-    SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
+    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "category IN ($category)")
 );
