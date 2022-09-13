@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2022 at 04:47 PM
+-- Generation Time: Sep 13, 2022 at 05:26 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -96,31 +96,18 @@ CREATE TABLE `feedback` (
 
 CREATE TABLE `files` (
   `id` int(11) NOT NULL,
-  `detail` varchar(200) NOT NULL,
+  `unit_kerja` varchar(200) NOT NULL COMMENT '1: planning\r\n2: pmo\r\n3: gov\r\n4: security',
   `name` varchar(255) NOT NULL,
-  `size` int(11) NOT NULL,
-  `downloads` int(11) NOT NULL
+  `tanggal` date DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `files`
 --
 
-INSERT INTO `files` (`id`, `detail`, `name`, `size`, `downloads`) VALUES
-(3, '', 'DG Yoga.pdf', 113897, 1),
-(21, 'planning', 'DG Yoga (1).pdf', 113897, 0),
-(22, 'planning', 'DG Yoga (1).pdf', 113897, 0),
-(23, '', 'DG Yoga (1).pdf', 113897, 0),
-(24, '', 'DG Yoga (1).pdf', 113897, 0),
-(25, 'pmo', 'DG Yoga (1).pdf', 113897, 0),
-(27, 'pmo', 'Users list-report (8) (1).xls', 735, 0),
-(28, 'pmo', 'Users list-report (8) (1).xls', 735, 0),
-(29, 'pmo', 'Users list-report (8) (1).xls', 735, 0),
-(30, 'gov', 'DG Yoga (1).pdf', 113897, 0),
-(31, 'gov', 'DG Yoga (1).pdf', 113897, 0),
-(32, 'gov', 'DG Yoga (1).pdf', 113897, 0),
-(33, 'gov', 'Users list-report (8) (1).xls', 735, 0),
-(34, 'planning', 'E31200284_NurlitaAyuRakhmawati_A_Film.docx', 78779, 0);
+INSERT INTO `files` (`id`, `unit_kerja`, `name`, `tanggal`, `user_id`) VALUES
+(1, '2', 'Nurlita Ayu Rakhmawati_Bendahara.pdf', '2022-09-12', 21);
 
 -- --------------------------------------------------------
 
@@ -170,47 +157,12 @@ INSERT INTO `notification` (`id`, `notiuser`, `notireciver`, `notitype`, `time`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_files`
---
-
-CREATE TABLE `tbl_files` (
-  `id` int(30) NOT NULL,
-  `filename` int(200) NOT NULL,
-  `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `level` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `nama`, `username`, `password`, `level`) VALUES
-(4, 'nurlita ayu', 'admin', 'admin123', 'admin'),
-(5, 'putri regina', 'staff', 'staff123', 'staff'),
-(6, 'nur laili', 'staff', 'staff123', 'staff');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `nip` int(100) NOT NULL,
+  `nip` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -218,9 +170,9 @@ CREATE TABLE `users` (
   `mobile` varchar(50) NOT NULL,
   `designation` varchar(50) NOT NULL,
   `image` varchar(50) NOT NULL,
-  `status` int(10) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT 0,
   `baned` enum('n','y') NOT NULL,
-  `logintime` int(2) NOT NULL
+  `logintime` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -228,13 +180,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nip`, `name`, `email`, `password`, `role`, `mobile`, `designation`, `image`, `status`, `baned`, `logintime`) VALUES
-(20, 31231, 'Nurlita Ayu', 'ayu@email.com', '0192023a7bbd73250516f069df18b500', 'Administrator', '320930232', 'Lumajang', '38575-ayu.jpg', 1, 'n', 0),
-(21, 1212123, 'Putri Regina', 'putreg@email.com', '0192023a7bbd73250516f069df18b500', 'operator', '0832083', 'Bondowoso', 'img_20220328_105234.jpg', 1, 'n', 0),
-(22, 1231313, 'Laili Wahyu', 'laili@email.com', '0192023a7bbd73250516f069df18b500', 'Supervisor', '12312313', 'Jember', 'laili-jas-resmi.png', 1, 'n', 0),
-(24, 65238274, 'Viewer', '1111@gmail', 'b59c67bf196a4758191e42f76670ceba', 'Viewer', '081280060', 'Surabaya', 'polije.jpg', 0, 'n', 0),
-(26, 836584, 'Viewer2', '2222@gmail', '934b535800b1cba8f96a5d72f72f1611', 'Viewer', '083754', 'Bondowoso', 'polije.jpg', 0, 'n', 0),
-(29, 8954383, 'Super', '3333@gmail', '2be9bd7a3434f7038ca27d1918de58bd', 'Supervisor', '7365448', 'nhsvd', 'polije.jpg', 1, 'n', 0),
-(30, 37354748, 'viewer7', '7777@gmail', 'd79c8788088c2193f0244d8f1f36d2db', 'Viewer', '09365048', 'hgedf', 'polije.jpg', 1, 'n', 0);
+(20, 31231, 'Nurlita Ayu', 'admin@mail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'Administrator', '320930232', 'Lumajang', '38575-ayu.jpg', 1, 'n', 0),
+(21, 1212123, 'Putri Regina', 'operator@mail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'Operator', '0832083', 'Bondowoso', 'img_20220328_105234.jpg', 1, 'n', 0),
+(22, 1231313, 'Laili Wahyu', 'supervisor@mail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'Supervisor', '12312313', 'Jember', 'laili-jas-resmi.png', 1, 'n', 0),
+(24, 65238274, 'Viewer', 'viewer@mail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'Viewer', '081280060', 'Surabaya', 'polije.jpg', 1, 'n', 0);
 
 --
 -- Indexes for dumped tables
@@ -262,24 +211,13 @@ ALTER TABLE `feedback`
 -- Indexes for table `files`
 --
 ALTER TABLE `files`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `notification`
 --
 ALTER TABLE `notification`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_files`
---
-ALTER TABLE `tbl_files`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -314,7 +252,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -323,22 +261,20 @@ ALTER TABLE `notification`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `tbl_files`
---
-ALTER TABLE `tbl_files`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `files`
+--
+ALTER TABLE `files`
+  ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
