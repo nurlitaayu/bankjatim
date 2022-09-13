@@ -70,13 +70,13 @@
 
 
             var dataTable = $('#dataTable').DataTable({
-                'processing': true,
-                'serverSide': true,
-                "ordering": true, // Set true agar bisa di sorting
+                processing: true,
+                serverSide: true,
+                ordering: true, // Set true agar bisa di sorting
                 ajax: {
-                    "url": "supervisor/get_planning.php",
-                    "type": "GET"
-                },
+                    url: "supervisor/get_planning.php",
+                    type: "GET"
+                }
             });
         });
     </script>

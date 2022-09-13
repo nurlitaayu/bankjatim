@@ -1,18 +1,18 @@
 <?php
 
 // DB table to use
-// $table = <<<EOT
-// (
-//     SELECT 
-//         f.id,
-//         f.name,
-//         f.tanggal,
-//         u.name as name_user
-//     FROM files f
-//     LEFT JOIN users u ON f.user_id = u.id
-// ) temp
-// EOT;
-$table = 'files';
+$table = <<<EOT
+(
+    SELECT 
+        f.id,
+        f.name,
+        f.tanggal,
+        u.name as user_name
+    FROM files f
+    LEFT JOIN users u ON f.user_id = u.id
+) temp
+EOT;
+// $table = 'files';
 
 // Table's primary key
 $primaryKey = 'id';
@@ -23,9 +23,22 @@ $primaryKey = 'id';
 // indexes
 $columns = array(
     array('db' => 'id', 'dt' => 0),
-    array('db' => 'name',  'dt' => 1),
-    array('db' => 'tanggal',   'dt' => 2),
-    array('db' => 'user_id',     'dt' => 3),
+    array('db' => 'name', 'dt' => 1),
+    array('db' => 'tanggal', 'dt' => 2),
+    array('db' => 'user_name', 'dt' => 3,),
+    array('db' => 'id', 'dt' => 4, 'formatter' => function ($plan, $row) {
+        return '
+            <div style="display: flex; ">
+                <form action="change_plan.php?acc_id='. $plan .'" method="post">
+                    <button>Accept</button>
+                </form>
+                <form action="change.plan.php?reject_id='.$plan.'" method="post">
+                    <button>Reject</button>
+                </form>
+            </div>
+        
+        ';
+    }),
 );
 
 // SQL server connection information

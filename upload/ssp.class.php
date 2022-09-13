@@ -261,7 +261,7 @@ class SSP
 			$db,
 			$bindings,
 			"SELECT `" . implode("`, `", self::pluck($columns, 'db')) . "`
-			 FROM `$table`
+			 FROM $table
 			 $where
 			 $order
 			 $limit"
@@ -272,7 +272,7 @@ class SSP
 			$db,
 			$bindings,
 			"SELECT COUNT(`{$primaryKey}`)
-			 FROM   `$table`
+			 FROM   $table
 			 $where"
 		);
 		$recordsFiltered = $resFilterLength[0][0];
@@ -281,7 +281,7 @@ class SSP
 		$resTotalLength = self::sql_exec(
 			$db,
 			"SELECT COUNT(`{$primaryKey}`)
-			 FROM   `$table`"
+			 FROM   $table"
 		);
 		$recordsTotal = $resTotalLength[0][0];
 
@@ -357,7 +357,7 @@ class SSP
 			$db,
 			$bindings,
 			"SELECT `" . implode("`, `", self::pluck($columns, 'db')) . "`
-			 FROM `$table`
+			 FROM $table
 			 $where
 			 $order
 			 $limit"
@@ -368,7 +368,7 @@ class SSP
 			$db,
 			$bindings,
 			"SELECT COUNT(`{$primaryKey}`)
-			 FROM   `$table`
+			 FROM   $table
 			 $where"
 		);
 		$recordsFiltered = $resFilterLength[0][0];
@@ -378,7 +378,7 @@ class SSP
 			$db,
 			$bindings,
 			"SELECT COUNT(`{$primaryKey}`)
-			 FROM   `$table` " .
+			 FROM   $table " .
 				$whereAllSql
 		);
 		$recordsTotal = $resTotalLength[0][0];
