@@ -98,7 +98,7 @@
                             <div class="col-md-8">
                                 <div class="list-group">
                                     <?php
-                                    for ($i = 0; $i < 20; $i++) :  ?>
+                                    for ($i = 0; $i < 10; $i++) :  ?>
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="d-flex w-100 justify-content-between">
                                                 <h5 class="mb-1">Laporan Dewan Komisaris - Bulan Tahun</h5>

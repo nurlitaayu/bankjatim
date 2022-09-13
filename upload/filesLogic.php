@@ -38,7 +38,7 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
 
     if (!in_array($extension, ['zip', 'pdf', 'docx', 'xls'])) {
         echo "You file extension must be .zip, .pdf xls. or .docx";
-    } elseif ($_FILES['myfile']['size'] > 5000000) { // file shouldn't be larger than 1Megabyte
+    } elseif ($_FILES['myfile']['size'] > 5000000) { // file shouldn't be larger than 5Megabyte
         echo "File too large!";
     } else {
         // move the uploaded (temporary) file to the specified destination
