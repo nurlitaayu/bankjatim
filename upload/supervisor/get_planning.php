@@ -2,7 +2,7 @@
 
 // DB table to use
 
-$category = $_GET['category'] ?: join(',', [1, 2, 3, 4]);
+$category = $_GET['category'] ?: join(',', [1, 2, 3]);
 
 $table = <<<EOT
 (
@@ -10,10 +10,10 @@ $table = <<<EOT
         f.id,
         f.name,
         f.tanggal,
-        f.unit_kerja as category,
+        f.category_id,
         u.name as user_name
     FROM files f
-    LEFT JOIN users u ON f.user_id = u.id
+    INNER JOIN users u ON f.user_id = u.id
 ) temp
 EOT;
 // $table = 'files';
@@ -42,7 +42,7 @@ $columns = array(
             </div>
         
         ';
-    }),
+    })
 );
 
 // SQL server connection information
@@ -62,5 +62,5 @@ $sql_details = array(
 require('../ssp.class.php');
 
 echo json_encode(
-    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "category IN ($category)")
+    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "category_id IN ($category)")
 );

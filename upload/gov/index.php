@@ -1,29 +1,4 @@
 <?php include 'filesLogic.php'; ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<link rel="stylesheet" href="stylet.css">
-	<title>GOV</title>
-</head>
-
-<body>
-	<div class="container" style="heigth:70%; ">
-		<div class="row">
-			<form action="index.php" method="post" enctype="multipart/form-data">
-				<h3>Upload File Report</h3>
-				<input type="file" name="myfile"></input> <br>
-				<input type="hidden" value="<?= $_SESSION['user_id']; ?>" name="user_id">
-				<button type="submit" class="btn-danger" name="save">upload</button>
-				</a>
-			</form>
-		</div>
-	</div>
-	<!-- <button onClick="window.location.reload();">Refresh</button> -->
-</body>
-
-</html>
-
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -34,8 +9,10 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
+	<!-- <link rel="stylesheet" href="stylet.css"> -->
+	<title>GOV</title>
 
-	<title>Manage Feedback</title>
+	<?php include('css/styles.php') ?>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -76,24 +53,54 @@
 </head>
 
 <body>
+
 	<?php include('includes/header.php'); ?>
 
 	<div class="ts-main-content">
 		<?php include('includes/leftbar.php'); ?>
 		<div class="content-wrapper">
-			<div class="container-fluid">
+			<div class="container">
+				<div class="row" style="margin-top:10vh;">
+					<form action="index.php" method="post" enctype="multipart/form-data">
+						<div class="col-md-4">
+							<h4>Kategori</h4>
+							<div>
+								<input type="radio" name="frequency_id" value="1" id="yearly">
+								<label for="yearly">Laporan Tahunan</label>
+							</div>
 
+							<div>
+								<input type="radio" name="frequency_id" value="2" id="quarterly">
+								<label for="quarterly">Laporan Triwulan</label>
+							</div>
 
-				</tbody>
-				</table>
+							<div>
+								<input type="radio" name="frequency_id" value="3" id="monthly">
+								<label for="monthly">Laporan Bulanan</label>
+							</div>
+
+							<h4>Nama Dokumen</h4>
+							<select name="category_id" id="category">
+							</select>
+
+						</div>
+						<div class="col-md-8">
+							<h3>Upload File Report</h3>
+							<div class="form-group">
+								<label for="">File UPLOAD</label>
+								<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
+								<input type="file" name="myfile"></input>
+							</div>
+							<br>
+							<button type="submit" class="btn-danger btn-md" name="save">upload</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-	</div>
 
-	</div>
-	</div>
-	</div>
+
 
 
 	<!-- Loading Scripts -->
@@ -107,10 +114,27 @@
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
+		var categories = <?= json_encode($categories) ?>
+
 		$(document).ready(function() {
 			setTimeout(function() {
 				$('.succWrap').slideUp("slow");
 			}, 3000);
+
+
+			$("input[name='frequency_id']").change(() => {
+				$("#category").empty()
+				const id = $("input[name='frequency_id']:checked").val()
+				console.log(id)
+				filtered = categories.filter(category => category.frequency_id == id)
+
+
+				filtered.forEach(cat => {
+					$("#category").append(`<option value="${cat.id}">${cat.name}</option>`)
+				});
+
+			})
+
 		});
 	</script>
 </body>

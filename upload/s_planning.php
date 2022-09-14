@@ -1,6 +1,6 @@
 <?php include 'filesLogic.php'; ?>
 
-<?php 
+<?php
 $category = $_GET['category'] ?: [];
 
 ?>
@@ -53,9 +53,9 @@ $category = $_GET['category'] ?: [];
                             </div>
 
                             <div>
-                                <!-- Pmo -->
-                                <input type="checkbox" name="category[]" value="2" id="pmo" <?= in_array(2, $category) ? 'checked' : '' ?>>
-                                <label for="pmo">Laporan Triwulan</label>
+                                <!-- Quarterly -->
+                                <input type="checkbox" name="category[]" value="2" id="quarterly" <?= in_array(2, $category) ? 'checked' : '' ?>>
+                                <label for="quarterly">Laporan Triwulan</label>
                             </div>
 
                             <div>
