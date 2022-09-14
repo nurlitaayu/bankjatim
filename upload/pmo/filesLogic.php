@@ -1,26 +1,31 @@
 <?php
-
 session_start();
 // connect to the database
 $conn = mysqli_connect('localhost', 'root', '', 'bankjatim');
 
-// $sql = "SELECT * FROM files where detail='pmo'";
-// $result = mysqli_query($conn, $sql);
+$sql = "SELECT * FROM categories WHERE work_unit = 2";
+$result = mysqli_query($conn, $sql);
+$categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// $files = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+// $user = session_name();
 
 // Uploads files
 if (isset($_POST['save'])) { // if save button on the form is clicked
-    // name of the uploaded file
-    $filename = $_FILES['myfile']['name'];
-
     $unit_kerja = 2;
     $date = date('Y-m-d');
     $user = $_POST['user_id'];
+    $categoryId = $_POST['category_id'];
 
 
-    // destination of the file on the server
-    $destination = $_SERVER['DOCUMENT_ROOT'] . '/upload/uploads/pmo/' . $filename;
+    // name of the uploaded file
+    $filename = $_FILES['myfile']['name'];
+
+
+
+    $destination = $_SERVER['DOCUMENT_ROOT'] . '/upload/uploads/planning/' . $filename;
+
 
     // get the file extension
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -31,51 +36,17 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
 
     if (!in_array($extension, ['zip', 'pdf', 'docx', 'xls'])) {
         echo "You file extension must be .zip, .pdf xls. or .docx";
-    } elseif ($_FILES['myfile']['size'] > 1000000) { // file shouldn't be larger than 1Megabyte
+    } elseif ($_FILES['myfile']['size'] > 5000000) { // file shouldn't be larger than 5Megabyte
         echo "File too large!";
     } else {
         // move the uploaded (temporary) file to the specified destination
         if (move_uploaded_file($file, $destination)) {
-            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id) VALUES ('$unit_kerja', '$filename', '$date' ,  '$user')";
+            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId')";
             if (mysqli_query($conn, $sql)) {
                 echo "File uploaded successfully";
             }
         } else {
             echo "Failed to upload file.";
         }
-    }
-}
-
-// Downloads files
-if (isset($_GET['file_id'])) {
-    $id = $_GET['file_id'];
-
-    // fetch file to download from database
-    $sql = "SELECT * FROM files WHERE id=$id";
-    $result = mysqli_query($conn, $sql);
-
-    $file = mysqli_fetch_assoc($result);
-    $filepath = 'uploads/' . $file['name'];
-
-    if (file_exists($filepath)) {
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . basename($filepath));
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize('uploads/' . $file['name']));
-
-        //This part of code prevents files from being corrupted after download
-        ob_clean();
-        flush();
-
-        readfile('uploads/' . $file['name']);
-
-        // Now update downloads count
-        $newCount = $file['downloads'] + 1;
-        $updateQuery = "UPDATE files SET downloads=$newCount WHERE id=$id";
-        mysqli_query($conn, $updateQuery);
-        exit;
     }
 }

@@ -2,7 +2,7 @@
 
 // DB table to use
 
-$category = $_GET['category'] ?: join(',', [1, 2, 3, 4]);
+$category = $_GET['category'] ?: join(',', [1, 2, 3]);
 
 $table = <<<EOT
 (

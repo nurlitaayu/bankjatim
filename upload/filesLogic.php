@@ -3,10 +3,9 @@ session_start();
 // connect to the database
 $conn = mysqli_connect('localhost', 'root', '', 'bankjatim');
 
-$sql = "SELECT * FROM files ORDER BY `files`.`id` DESC LIMIT 10";
+$sql = "SELECT * FROM categories WHERE work_unit = 1";
 $result = mysqli_query($conn, $sql);
-
-$files = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
 
@@ -14,11 +13,10 @@ $files = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 // Uploads files
 if (isset($_POST['save'])) { // if save button on the form is clicked
-
-
-    $unit_kerja = 2;
+    $unit_kerja = 1;
     $date = date('Y-m-d');
     $user = $_POST['user_id'];
+    $categoryId = $_POST['category_id'];
 
 
     // name of the uploaded file
@@ -43,7 +41,7 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     } else {
         // move the uploaded (temporary) file to the specified destination
         if (move_uploaded_file($file, $destination)) {
-            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user')";
+            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId')";
             if (mysqli_query($conn, $sql)) {
                 echo "File uploaded successfully";
             }
