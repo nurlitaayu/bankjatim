@@ -47,21 +47,21 @@ $category = $_GET['category'] ?: [];
                     <div class="col-lg-4">
                         <form action="" method="get">
                                                         <div>
-                                <!-- Planning -->
-                                <input type="checkbox" name="category[]" value="1" id="planning" <?php echo in_array(1, $category) == true ? "checked" : '' ?> >
-                                <label for="planning">Laporan Tahunan</label>
+                                <!-- Yearly -->
+                                <input type="checkbox" name="category[]" value="1" id="yearly" <?php echo in_array(1, $category) == true ? "checked" : '' ?> >
+                                <label for="yearly">Laporan Tahunan</label>
                             </div>
 
                             <div>
-                                <!-- Pmo -->
-                                <input type="checkbox" name="category[]" value="2" id="pmo" <?= in_array(2, $category) ? 'checked' : '' ?>>
-                                <label for="pmo">Laporan Triwulan</label>
+                                <!-- Quarterly -->
+                                <input type="checkbox" name="category[]" value="2" id="quarterly" <?= in_array(2, $category) ? 'checked' : '' ?>>
+                                <label for="quarterly">Laporan Triwulan</label>
                             </div>
 
                             <div>
-                                <!-- Gov -->
-                                <input type="checkbox" name="category[]" value="3" id="gov" <?= in_array(3, $category) ? 'checked' : '' ?>>
-                                <label for="gov">Laporan Bulanan</label>
+                                <!-- Monthly -->
+                                <input type="checkbox" name="category[]" value="3" id="monthly" <?= in_array(3, $category) ? 'checked' : '' ?>>
+                                <label for="monthly">Laporan Bulanan</label>
                             </div>
 
 
