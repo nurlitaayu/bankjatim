@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 13, 2022 at 05:26 PM
+-- Host: localhost
+-- Generation Time: Sep 14, 2022 at 05:03 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -24,22 +24,51 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `categories`
 --
 
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `categories` (
+  `id` int(1) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `frequency_id` int(1) NOT NULL,
+  `work_unit` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `categories`
 --
 
-INSERT INTO `admin` (`id`, `username`, `email`, `password`) VALUES
-(1, 'Admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500');
+INSERT INTO `categories` (`id`, `name`, `frequency_id`, `work_unit`) VALUES
+(1, 'Laporan Dewan Komisaris', 3, 1),
+(2, 'Laporan Progress TI ke Direktur TI', 3, 1),
+(3, 'Laporan Transformasi BPD', 3, 1),
+(4, 'Laporan KPI Divisi TI', 3, 1),
+(5, 'Laporan Realilsasi RBB', 2, 1),
+(6, 'Laporan RSTI', 1, 1),
+(7, 'doc Fasibility Study', 3, 2),
+(8, 'doc RFI', 3, 2),
+(9, 'doc TOR', 3, 2),
+(10, 'doc ijin prinsip', 3, 2),
+(11, 'doc nota pengadaan', 3, 2),
+(12, 'doc nota invois', 3, 2),
+(13, 'doc SPK (Surat Perintah Kerja)', 3, 2),
+(14, 'doc pengembangan', 3, 2),
+(15, 'Laporan Triwulan PMO', 2, 2),
+(16, 'Laporan Tahunan PMO', 1, 2),
+(17, 'document temuan audit', 3, 3),
+(18, 'laporan resources assignment', 3, 3),
+(19, 'laporan juknis (petunjuk teknis)', 3, 3),
+(20, 'laporan SOP (Standart Operating Procedure)', 3, 3),
+(21, 'Laporan Triwulan Gov', 2, 3),
+(22, 'Laporan Tahunan Gov', 1, 3),
+(31, 'Laporan Monitoring Kemanan Informasi Firewall KP', 3, 4),
+(32, 'Laporan Monitoring Power User (Log Management System)', 3, 4),
+(33, 'Laporan Monitoring User VPN (Forticlient)', 3, 4),
+(34, 'Laporan Monitoring User (Log management System)', 3, 4),
+(35, 'Laporan Monitoring Antivirus (Kaspersky)', 3, 4),
+(36, 'Laporan Monitoring User (Admin Transaksional)', 3, 4),
+(37, 'Laporan Triwulan Security', 2, 4),
+(38, 'Laporan Tahunan Security', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -99,15 +128,29 @@ CREATE TABLE `files` (
   `unit_kerja` varchar(200) NOT NULL COMMENT '1: planning\r\n2: pmo\r\n3: gov\r\n4: security',
   `name` varchar(255) NOT NULL,
   `tanggal` date DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `category_id` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `files`
+-- Table structure for table `frequencies`
 --
 
-INSERT INTO `files` (`id`, `unit_kerja`, `name`, `tanggal`, `user_id`) VALUES
-(1, '2', 'Nurlita Ayu Rakhmawati_Bendahara.pdf', '2022-09-12', 21);
+CREATE TABLE `frequencies` (
+  `id` int(1) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `frequencies`
+--
+
+INSERT INTO `frequencies` (`id`, `name`) VALUES
+(1, 'Laporan Tahunan'),
+(2, 'Laporan Triwulan'),
+(3, 'Laporan Bulanan');
 
 -- --------------------------------------------------------
 
@@ -190,10 +233,11 @@ INSERT INTO `users` (`id`, `nip`, `name`, `email`, `password`, `role`, `mobile`,
 --
 
 --
--- Indexes for table `admin`
+-- Indexes for table `categories`
 --
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_frequency` (`frequency_id`);
 
 --
 -- Indexes for table `deleteduser`
@@ -212,7 +256,14 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `category_id` (`category_id`) USING BTREE;
+
+--
+-- Indexes for table `frequencies`
+--
+ALTER TABLE `frequencies`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `notification`
@@ -231,10 +282,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `categories`
 --
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `categories`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `deleteduser`
@@ -252,7 +303,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `frequencies`
+--
+ALTER TABLE `frequencies`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -271,9 +328,16 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `categories`
+--
+ALTER TABLE `categories`
+  ADD CONSTRAINT `fk_frequency` FOREIGN KEY (`frequency_id`) REFERENCES `frequencies` (`id`) ON UPDATE CASCADE;
+
+--
 -- Constraints for table `files`
 --
 ALTER TABLE `files`
+  ADD CONSTRAINT `files_category_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
