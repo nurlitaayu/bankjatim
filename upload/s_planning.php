@@ -49,7 +49,7 @@ $category = $_GET['category'] ?: [];
                                                         <div>
                                 <!-- Planning -->
                                 <input type="checkbox" name="category[]" value="1" id="planning" <?php echo in_array(1, $category) == true ? "checked" : '' ?> >
-                                <label for="planning">Laporan Tahunan</label>
+                                <label for="planning">Laporan Bulanan</label>
                             </div>
 
                             <div>
@@ -61,7 +61,7 @@ $category = $_GET['category'] ?: [];
                             <div>
                                 <!-- Gov -->
                                 <input type="checkbox" name="category[]" value="3" id="gov" <?= in_array(3, $category) ? 'checked' : '' ?>>
-                                <label for="gov">Laporan Bulanan</label>
+                                <label for="gov">Laporan Tahunan</label>
                             </div>
 
 

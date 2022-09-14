@@ -34,10 +34,10 @@ $columns = array(
         return '
             <div style="display: flex; ">
                 <form action="change_plan.php?acc_id=' . $plan . '" method="post">
-                <i class="fa fa-power-off" style="font-size:24px;color:red"></i>
+                <i class="fa fa-power-off" style="color:red"></i>
                 </form>
                 <form action="change.plan.php?reject_id=' . $plan . '" method="post">
-                <i class="fa fa-trash" style="font-size:24px;color:red"></i>
+                <i class="fa fa-trash" style="color:red"></i>
                 </form>
             </div>
         
