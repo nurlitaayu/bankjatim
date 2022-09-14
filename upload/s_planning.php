@@ -43,31 +43,25 @@ $category = $_GET['category'] ?: [];
         <div class="content-wrapper">
             <div class="container">
                 <h1>Laporan Unit Kerja</h1>
-                <div class="row" style="margin-top: 40px;">
+                <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-4">
                         <form action="" method="get">
                                                         <div>
                                 <!-- Planning -->
                                 <input type="checkbox" name="category[]" value="1" id="planning" <?php echo in_array(1, $category) == true ? "checked" : '' ?> >
-                                <label for="planning">Planning</label>
+                                <label for="planning">Laporan Tahunan</label>
                             </div>
 
                             <div>
                                 <!-- Pmo -->
                                 <input type="checkbox" name="category[]" value="2" id="pmo" <?= in_array(2, $category) ? 'checked' : '' ?>>
-                                <label for="pmo">PMO</label>
+                                <label for="pmo">Laporan Triwulan</label>
                             </div>
 
                             <div>
                                 <!-- Gov -->
                                 <input type="checkbox" name="category[]" value="3" id="gov" <?= in_array(3, $category) ? 'checked' : '' ?>>
-                                <label for="gov">Gov</label>
-                            </div>
-
-                            <div>
-                                <!-- Security -->
-                                <input type="checkbox" name="category[]" value="4" id="security" <?= in_array(4, $category) ? 'checked' : '' ?>>
-                                <label for="security">Security</label>
+                                <label for="gov">Laporan Bulanan</label>
                             </div>
 
 
