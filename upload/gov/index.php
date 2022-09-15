@@ -59,42 +59,52 @@
 	<div class="ts-main-content">
 		<?php include('includes/leftbar.php'); ?>
 		<div class="content-wrapper">
-			<div class="container">
-				<div class="row" style="margin-top:10vh;">
-					<form action="index.php" method="post" enctype="multipart/form-data">
-						<div class="col-md-4">
-							<h4>Kategori</h4>
-							<div>
-								<input type="radio" name="frequency_id" value="1" id="yearly">
-								<label for="yearly">Laporan Tahunan</label>
+		<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
+										<form action="index.php" method="post" enctype="multipart/form-data">
+											<div class="col-md-4">
+												<h4>Kategori</h4>
+												<div>
+													<input type="radio" name="frequency_id" value="1" id="yearly">
+													<label for="yearly">Laporan Tahunan</label>
+												</div>
+
+												<div>
+													<input type="radio" name="frequency_id" value="2" id="quarterly">
+													<label for="quarterly">Laporan Triwulan</label>
+												</div>
+
+												<div>
+													<input type="radio" name="frequency_id" value="3" id="monthly">
+													<label for="monthly">Laporan Bulanan</label>
+												</div>
+
+												<h4>Nama Dokumen</h4>
+												<select name="category_id" id="category" style="width:200px;">
+												</select>
+
+											</div>
+											<div class="col-md-8">
+												<h3>Upload File Report</h3>
+												<div class="form-group">
+													<label for="">File UPLOAD</label>
+													<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
+													<input type="file" name="myfile"></input>
+												</div>
+												<br>
+												<button type="submit" class="btn-danger btn-md" name="save">upload</button>
+											</div>
+										</form>
+									</div>
+								</div>
 							</div>
-
-							<div>
-								<input type="radio" name="frequency_id" value="2" id="quarterly">
-								<label for="quarterly">Laporan Triwulan</label>
-							</div>
-
-							<div>
-								<input type="radio" name="frequency_id" value="3" id="monthly">
-								<label for="monthly">Laporan Bulanan</label>
-							</div>
-
-							<h4>Nama Dokumen</h4>
-							<select name="category_id" id="category">
-							</select>
-
 						</div>
-						<div class="col-md-8">
-							<h3>Upload File Report</h3>
-							<div class="form-group">
-								<label for="">File UPLOAD</label>
-								<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
-								<input type="file" name="myfile"></input>
-							</div>
-							<br>
-							<button type="submit" class="btn-danger btn-md" name="save">upload</button>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
