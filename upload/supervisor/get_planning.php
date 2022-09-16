@@ -8,12 +8,17 @@ $table = <<<EOT
 (
     SELECT 
         f.id,
-        f.name,
+        row_number() over(order by f.id) AS rn,
+        c.name,
         f.tanggal,
-        f.category_id,
+        c.frequency_id,
         u.name as user_name
-    FROM files f
+    FROM 
+        files f
     INNER JOIN users u ON f.user_id = u.id
+    INNER JOIN categories c ON f.category_id = c.id
+    WHERE
+        c.work_unit = 1
 ) temp
 EOT;
 // $table = 'files';
@@ -26,7 +31,7 @@ $primaryKey = 'id';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array('db' => 'id', 'dt' => 0),
+    array('db' => 'rn', 'dt' => 0),
     array('db' => 'name', 'dt' => 1),
     array('db' => 'tanggal', 'dt' => 2),
     array('db' => 'user_name', 'dt' => 3,),
@@ -62,5 +67,5 @@ $sql_details = array(
 require('../ssp.class.php');
 
 echo json_encode(
-    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "category_id IN ($category)")
+    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "frequency_id IN ($category)")
 );
