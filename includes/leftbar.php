@@ -12,8 +12,9 @@
 			<a style="background:#c9c8c5; color:black;" href="#"> &nbsp;Unit Kerja</a>
 
 			<?php
-
+echo("asdasdasdsad");
 			$role =  $_SESSION['SESSION_role'];
+			var_dump($role);die;
 
 			switch ($role) {
 				case 'Operator':
