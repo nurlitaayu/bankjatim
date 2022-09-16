@@ -1,60 +1,47 @@
+<?php
+$role =  $_SESSION['SESSION_role'];
+?>
+
 <nav style="background:#ff4040;" class="ts-sidebar">
 	<ul class="ts-sidebar-menu">
 		<li class="ts-label">Main</li>
-		<li><a href="profile.php"><i class="fa fa-user"></i> &nbsp;Profile</a>
+		<li>
+			<a href="profile.php"><i class="fa fa-user"></i> &nbsp;Profile</a>
 		</li>
-
+		<li>
+			<a href="notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
 		</li>
-		<li><a href="notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
+		<li>
+			<a href="messages.php"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
 		</li>
-		<li><a href="messages.php"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
 		<li class=" ts-account">
 			<a style="background:#c9c8c5; color:black;" href="#"> &nbsp;Unit Kerja</a>
+			<ul>
+				<?php if ($role == 'Operator') { ?>
 
-			<?php
-echo("asdasdasdsad");
-			$role =  $_SESSION['SESSION_role'];
-			var_dump($role);die;
+					<li><a href="http://localhost:8000/upload/index.php" style="background:#ff4040;">Planning</a></li>
+					<li><a href="http://localhost:8000/upload/pmo/index.php" style="background:#ff4040;">PMO</a></li>
+					<li><a href="http://localhost:8000/upload/gov/index.php" style="background:#ff4040;">GOV</a></li>
+					<li><a href="http://localhost:8000/upload/security/index.php" style="background:#ff4040;">Security</a></li>
 
-			switch ($role) {
-				case 'Operator':
-			?>
+				<?php } elseif ($role == 'Supervisor') { ?>
 
-					<ul>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/index.php" style="background:#ff4040;">Planning <?php $_SESSION['user_id']; ?></a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/pmo.php" style="background:#ff4040;">PMO <?php $_SESSION['user_id']; ?></a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/gov.php" style="background:#ff4040;">GOV <?php $_SESSION['user_id']; ?></a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/security.php" style="background:#ff4040;">Security <?php $_SESSION['user_id']; ?></a></li>
-					</ul>
-				<?php
-					break;
-				case 'Supervisor': ?>
-					<ul>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/s_planning.php" style="background:#ff4040;">Planning</a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/pmo/s_pmo.php" style="background:#ff4040;">PMOss</a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/supervisor/s_gov.php" style="background:#ff4040;">GOV</a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/supervisor/s_security.php" style="background:#ff4040;">Security</a></li>
-					</ul>
+					<li><a href="http://localhost:8000/upload/s_planning.php" style="background:#ff4040;">Planning</a></li>
+					<li><a href="http://localhost:8000/upload/pmo/s_pmo.php" style="background:#ff4040;">PMO</a></li>
+					<li><a href="http://localhost:8000/upload/gov/s_gov.php" style="background:#ff4040;">GOV</a></li>
+					<li><a href="http://localhost:8000/upload/security/s_security.php" style="background:#ff4040;">Security</a></li>
 
-				<?php
-					break;
-				case 'Viewer': ?>
+				<?php } elseif ($role == 'Viewer') { ?>
 
-					<ul>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/index.php" style="background:#ff4040;">Planning</a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/pmo/index.php" style="background:#ff4040;">PMO</a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/gov/index.php" style="background:#ff4040;">GOV</a></li>
-						<li><a href="<?php echo HTTP_SERVER ?>upload/security/index.php" style="background:#ff4040;">Security</a></li>
-					</ul>
-			<?php
-					break;
-				default:
-					echo "Role Not Found";
-					break;
-			}
-			?>
+					<li><a href="http://localhost:8000/upload/index.php" style="background:#ff4040;">Planning</a></li>
+					<li><a href="http://localhost:8000/upload/pmo/index.php" style="background:#ff4040;">PMO</a></li>
+					<li><a href="http://localhost:8000/upload/gov/index.php" style="background:#ff4040;">GOV</a></li>
+					<li><a href="http://localhost:8000/upload/security/index.php" style="background:#ff4040;">Security</a></li>
 
-		</li>
+				<?php } ?>
+
+			</ul>
+
 		</li>
 	</ul>
 </nav>

@@ -2,17 +2,17 @@
 
 // DB table to use
 
-$category = $_GET['category'] ?: join(',', [1, 2, 3]);
+$frequency = $_GET['frequency'] ?: join(',', [1, 2, 3]);
 
 $table = <<<EOT
 (
     SELECT 
         f.id,
-        row_number() over(order by f.id) AS rn,
+        f.name AS docname,
         c.name,
         f.tanggal,
         c.frequency_id,
-        u.name as user_name
+        u.name AS user_name
     FROM 
         files f
     INNER JOIN users u ON f.user_id = u.id
@@ -31,17 +31,17 @@ $primaryKey = 'id';
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(
-    array('db' => 'rn', 'dt' => 0),
     array('db' => 'name', 'dt' => 1),
-    array('db' => 'tanggal', 'dt' => 2),
-    array('db' => 'user_name', 'dt' => 3,),
-    array('db' => 'id', 'dt' => 4, 'formatter' => function ($plan, $row) {
+    array('db' => 'docname', 'dt' => 2),
+    array('db' => 'tanggal', 'dt' => 3),
+    array('db' => 'user_name', 'dt' => 4,),
+    array('db' => 'id', 'dt' => 5, 'formatter' => function ($pmo, $row) {
         return '
             <div style="display: flex; ">
-                <form action="change_plan.php?acc_id=' . $plan . '" method="post">
-                <i class="fa fa-power-off" style="color:green"></i>
+                <form action="change_pmo.php?acc_id=' . $pmo . '" method="post">
+                <i class="fa fa-power-off" style="color:red"></i>
                 </form>
-                <form action="change.plan.php?reject_id=' . $plan . '" method="post">
+                <form action="change.pmo.php?reject_id=' . $pmo . '" method="post">
                 <i class="fa fa-trash" style="color:red"></i>
                 </form>
             </div>
@@ -67,5 +67,5 @@ $sql_details = array(
 require('../ssp.class.php');
 
 echo json_encode(
-    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "frequency_id IN ($category)")
+    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "frequency_id IN ($frequency)")
 );

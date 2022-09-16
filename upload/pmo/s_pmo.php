@@ -1,7 +1,7 @@
 <?php include 'filesLogic.php'; ?>
 
 <?php
-$category = $_GET['category'] ?: [];
+$frequency = $_GET['frequency'] ?? [];
 
 ?>
 <!doctype html>
@@ -17,19 +17,32 @@ $category = $_GET['category'] ?: [];
 
     <title>PMO</title>
 
-    <?php include('css/styles.php') ?>
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Sandstone Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Bootstrap Datatables -->
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+    <!-- Bootstrap social button library -->
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <!-- Bootstrap select -->
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <!-- Bootstrap file input -->
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <!-- Awesome Bootstrap checkbox -->
+    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+    <!-- Admin Stye -->
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Datatable CSS -->
-    <!-- <link href='https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'> -->
+    <link href='https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'> -->
 
     <!-- jQuery Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Datatable JS -->
-    <!-- <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> -->
-
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/date-1.1.2/datatables.min.css" />
-
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/date-1.1.2/datatables.min.js"></script>
 
 </head>
@@ -39,29 +52,29 @@ $category = $_GET['category'] ?: [];
     <?php require_once './includes/header.php'; ?>
 
     <div class="ts-main-content">
-        <?php require_once './includes/leftbar.php' ?>
+        <?php include '../../includes/leftbar.php' ?>
         <div class="content-wrapper">
             <div class="container">
                 <h1>Laporan Unit Kerja</h1>
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-4">
                         <form action="" method="get">
-                                                        <div>
-                                <!-- PMO -->
-                                <input type="checkbox" name="category[]" value="2" id="pMO" <?php echo in_array(1, $category) == true ? "checked" : '' ?> >
-                                <label for="pmo">Laporan Bulanan</label>
+                            <div>
+                                <!-- Monthly -->
+                                <input type="checkbox" name="frequency[]" value="3" id="monthly" <?= in_array(3, $frequency) ? "checked" : '' ?>>
+                                <label for="monthly">Laporan Bulanan</label>
                             </div>
 
                             <div>
                                 <!-- Quarterly -->
-                                <input type="checkbox" name="category[]" value="2" id="quarterly" <?= in_array(2, $category) ? 'checked' : '' ?>>
+                                <input type="checkbox" name="frequency[]" value="2" id="quarterly" <?= in_array(2, $frequency) ? 'checked' : '' ?>>
                                 <label for="quarterly">Laporan Triwulan</label>
                             </div>
 
                             <div>
-                                <!-- Gov -->
-                                <input type="checkbox" name="category[]" value="3" id="gov" <?= in_array(3, $category) ? 'checked' : '' ?>>
-                                <label for="gov">Laporan Tahunan</label>
+                                <!-- Yearly -->
+                                <input type="checkbox" name="frequency[]" value="1" id="yearly" <?= in_array(1, $frequency) ? 'checked' : '' ?>>
+                                <label for="yearly">Laporan Tahunan</label>
                             </div>
 
 
@@ -75,6 +88,7 @@ $category = $_GET['category'] ?: [];
                                 <tr>
                                     <th>No.</th>
                                     <th>Dokumen</th>
+                                    <th>Nama file</th>
                                     <th>Tanggal</th>
                                     <th>User Pengupload</th>
                                     <th>Action</th>
@@ -104,8 +118,18 @@ $category = $_GET['category'] ?: [];
                 processing: true,
                 serverSide: true,
                 ordering: true, // Set true agar bisa di sorting
+                columnDefs: [{
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": null,
+                    "title": 'No.',
+                    "render": function(data, type, full, meta) {
+                        return meta.settings._iDisplayStart + meta.row + 1;
+                    }
+                }],
                 ajax: {
-                    url: "supervisor/get_pmo.php?category=<?= join(',', $category) ?>",
+                    url: "../supervisor/get_pmo.php?frequency=<?= join(',', $frequency) ?>",
                     type: "GET"
                 }
             });
