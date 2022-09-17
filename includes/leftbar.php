@@ -6,13 +6,13 @@ $role =  $_SESSION['SESSION_role'];
 	<ul class="ts-sidebar-menu">
 		<li class="ts-label">Main</li>
 		<li>
-			<a href="profile.php"><i class="fa fa-user"></i> &nbsp;Profile</a>
+			<a href="http://localhost:8000/profile.php"><i class="fa fa-user"></i> &nbsp;Profile</a>
 		</li>
 		<li>
-			<a href="notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
+			<a href="http://localhost:8000/notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
 		</li>
 		<li>
-			<a href="messages.php"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
+			<a href="http://localhost:8000/messages.php"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
 		</li>
 		<li class=" ts-account">
 			<a style="background:#c9c8c5; color:black;" href="#"> &nbsp;Unit Kerja</a>
