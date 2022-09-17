@@ -54,9 +54,9 @@
 
 <body>
 
-    <?php include('includev/header.php'); ?>
+    <?php include('./includes/header.php'); ?> -->
     <div class="ts-main-content">
-        <?php include('includev/leftbar.php'); ?>
+        <?php include('./includes/leftbar.php'); ?>
         <div class="content-wrapper">
             <div class="container">
                 <div class="row" style="margin-top: 10vh;">
