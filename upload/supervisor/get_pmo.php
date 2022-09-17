@@ -1,7 +1,7 @@
 <?php
 
 // DB table to use
-
+require_once '../../includes/config.php';
 $frequency = $_GET['frequency'] ?: join(',', [1, 2, 3]);
 
 $table = <<<EOT
@@ -18,7 +18,7 @@ $table = <<<EOT
     INNER JOIN users u ON f.user_id = u.id
     INNER JOIN categories c ON f.category_id = c.id
     WHERE
-        c.work_unit = 2
+        c.work_unit = 2 AND approved = false
 ) temp
 EOT;
 // $table = 'files';
@@ -35,17 +35,22 @@ $columns = array(
     array('db' => 'docname', 'dt' => 2),
     array('db' => 'tanggal', 'dt' => 3),
     array('db' => 'user_name', 'dt' => 4,),
-    array('db' => 'id', 'dt' => 5, 'formatter' => function ($pmo, $row) {
+    array('db' => 'id', 'dt' => 5, 'formatter' => function ($id) {
         return '
             <div style="display: flex; ">
-                <form action="change_pmo.php?acc_id=' . $pmo . '" method="post">
-                <i class="fa fa-power-off" style="color:red"></i>
+                <form action="' . HTTP_SERVER . 'upload/supervisor/approve_file.php?id=' . $id . '" method="post">
+                    <button type="submit">
+                        <i class="fa fa-check" style="color:green"></i>
+                    </button>
                 </form>
-                <form action="change.pmo.php?reject_id=' . $pmo . '" method="post">
-                <i class="fa fa-trash" style="color:red"></i>
+
+
+                <form action=""' . HTTP_SERVER . 'upload/supervisor/delete_file.php?id=' . $id . '" method="post">
+                    <button type="submit">
+                        <i class="fa fa-trash" style="color:red"></i>
+                    </button>
                 </form>
             </div>
-        
         ';
     })
 );
