@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 14, 2022 at 05:03 PM
+-- Generation Time: Sep 17, 2022 at 11:52 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -129,7 +129,8 @@ CREATE TABLE `files` (
   `name` varchar(255) NOT NULL,
   `tanggal` date DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `category_id` int(1) DEFAULT NULL
+  `category_id` int(1) DEFAULT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -303,7 +304,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `frequencies`
