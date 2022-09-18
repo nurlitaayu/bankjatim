@@ -14,7 +14,7 @@ $date = $_GET['date'] ?? '';
 $categoryId = $_GET['category_id'] ?? '';
 $files = null;
 
-$query = "SELECT c.name, f.tanggal, fr.name AS frequency 
+$query = "SELECT c.name, f.tanggal, fr.name AS frequency, f.name AS doc_path 
 FROM files f  
 INNER JOIN categories c 
 ON f.category_id = c.id
@@ -142,7 +142,7 @@ if ($categoryId && $date) {
                             <div class="col-md-8">
                                 <div class="list-group">
                                     <?php foreach ($files as $key => $file) { ?>
-                                        <a href="#" class="list-group-item list-group-item-action">
+                                        <a target="_blank" href="<?= HTTP_SERVER.'upload/uploads/planning/'.$file['doc_path'] ?>" class="list-group-item list-group-item-action">
                                             <div class="d-flex w-100 justify-content-between">
                                                 <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['tanggal'] ?></h5>
                                                 <small><?= $file['tanggal'] ?></small>
