@@ -22,7 +22,12 @@ INNER JOIN frequencies fr
 ON c.frequency_id = fr.id
 WHERE f.approved = true";
 
-if ($date) {
+if ($categoryId && $date) {
+    $query = $query .= " AND c.id = ? AND f.tanggal = ?";
+    $stmt = $dbh->prepare($query);
+    $stmt->execute([$categoryId, $date]);
+    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} elseif ($date) {
     $query = $query .= " AND f.tanggal = ?";
     $stmt = $dbh->prepare($query);
     $stmt->execute([$date]);
@@ -31,11 +36,6 @@ if ($date) {
     $query = $query .= " AND c.id = ?";
     $stmt = $dbh->prepare($query);
     $stmt->execute([$categoryId]);
-    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} elseif ($categoryId && $date) {
-    $query = $query .= " AND c.id = ? AND f.tanggal = ?";
-    $stmt = $dbh->prepare($query);
-    $stmt->execute([$categoryId, $date]);
     $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     $stmt = $dbh->query($query);
@@ -165,7 +165,6 @@ if ($date) {
 <script src="./js/jquery.min.js"></script>
 <script src="js/bootstrap-select.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
 
 <script type="text/javascript">
     var categories = <?= json_encode($categories) ?>
