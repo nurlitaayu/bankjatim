@@ -105,57 +105,59 @@ if ($categoryId && $date) {
     <div class="ts-main-content">
         <?php include('../includes/leftbar.php'); ?>
         <div class="content-wrapper">
-            <div class="container">
-                <div class="row" style="margin-top: 10vh;">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h3 class="font-weight-bold">Kategori</h3>
-                                <form action="" method="get">
-                                    <div>
-                                        <input type="radio" name="frequency_id" value="1" id="yearly">
-                                        <label for="yearly">Laporan Tahunan</label>
-                                    </div>
-
-                                    <div>
-                                        <input type="radio" name="frequency_id" value="2" id="quarterly">
-                                        <label for="quarterly">Laporan Triwulan</label>
-                                    </div>
-
-                                    <div>
-                                        <input type="radio" name="frequency_id" value="3" id="monthly">
-                                        <label for="monthly">Laporan Bulanan</label>
-                                    </div>
-
-                                    <h4>Nama Dokumen</h4>
-                                    <select name="category_id" id="category" style="width:200px;">
-                                    </select>
-
-                                    <div class="form-group">
-                                        <label for="date">Tanggal Publish</label>
-                                        <input type="date" name="date" value="<?= $date ?>" class="form-control">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                            <div class="col-md-8">
-                                <div class="list-group">
-                                    <?php foreach ($files as $key => $file) { ?>
-                                        <a target="_blank" href="viewpdf.php?path=<?= HTTP_SERVER.'upload/uploads/planning/'.$file['doc_path'] ?>" class="list-group-item list-group-item-action">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['tanggal'] ?></h5>
-                                                <small><?= $file['tanggal'] ?></small>
+            <div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h3 class="font-weight-bold">Kategori</h3>
+                                        <form action="" method="get">
+                                            <div>
+                                                <input type="radio" name="frequency_id" value="1" id="yearly">
+                                                <label for="yearly">Laporan Tahunan</label>
                                             </div>
-                                            <small><?= $file['frequency'] ?></small>
-                                        </a>
-                                    <?php } ?>
 
-                                </div>
+                                            <div>
+                                                <input type="radio" name="frequency_id" value="2" id="quarterly">
+                                                <label for="quarterly">Laporan Triwulan</label>
+                                            </div>
+
+                                            <div>
+                                                <input type="radio" name="frequency_id" value="3" id="monthly">
+                                                <label for="monthly">Laporan Bulanan</label>
+                                            </div>
+
+                                            <h4>Nama Dokumen</h4>
+                                            <select name="category_id" id="category" style="width:200px;">
+                                            </select>
+
+                                            <div class="form-group">
+                                                <label for="date">Tanggal Publish</label>
+                                                <input type="date" name="date" value="<?= $date ?>" class="form-control">
+                                                <button type="submit" class="btn btn-primary">Cari</button>
+                                            </div>
+                                        </form>
+
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="list-group">
+                                                <?php foreach ($files as $key => $file) { ?>
+                                                    <a target="_blank" href="viewpdf.php?path=<?= HTTP_SERVER.'upload/uploads/planning/'.$file['doc_path'] ?>" class="list-group-item list-group-item-action">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['tanggal'] ?></h5>
+                                                            <small><?= $file['tanggal'] ?></small>
+                                                        </div>
+                                                        <small><?= $file['frequency'] ?></small>
+                                                    </a>
+                                                <?php } ?>
+                                            </div>
+                                    </div>
+                            </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

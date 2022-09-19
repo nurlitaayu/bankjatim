@@ -52,6 +52,79 @@
 											<h4>Nama Dokumen</h4>
 											<select name="category_id" id="category" style="width:200px;">
 											</select>
+										
+											<div class="col-md-8">
+											<h3>Year</h3>
+												<div>
+												<select name="year" style="width:70px;">
+												<option value="">Select</option>
+												<option value="y1">2017</option>
+												<option value="y2">2018</option>
+												<option value="y3">2019</option>
+												<option value="y4">2010</option>
+												<option value="y5">2021</option>
+												<option value="y7">2022</option>										
+												</select>
+												</div>
+											</div>
+
+											<div class="col-md-8">
+											<h3>Month</h3>
+												<div>
+												<select name="tmonth" style="width:70px;">
+												<option value="">Select</option>
+												<option value="tm1">Januari</option>
+												<option value="tm2">April</option>
+												<option value="tm3">Juli</option>
+												<option value="tm4">April</option>
+												<option value="tm5">Oktober</option>							
+												</select>
+												</div>
+											</div>
+											<h3>Year</h3>
+												<div>
+												<select name="year" style="width:70px;">
+												<option value="">Select</option>
+												<option value="y1">2017</option>
+												<option value="y2">2018</option>
+												<option value="y3">2019</option>
+												<option value="y4">2010</option>
+												<option value="y5">2021</option>
+												<option value="y7">2022</option>										
+												</select>
+					
+
+											<div class="col-md-8">
+											<h3>Month</h3>
+												<div>
+												<select name="month" style="width:70px;">
+												<option value="">Select</option>
+												<option value="m1">Januari</option>
+												<option value="m2">Februari</option>
+												<option value="m3">Maret</option>
+												<option value="m4">April</option>
+												<option value="m5">Mei</option>
+												<option value="m6">Juni</option>		
+												<option value="m7">Juli</option>
+												<option value="m8">Agustus</option>
+												<option value="m9">September</option>
+												<option value="m10">Oktober</option>
+												<option value="m11">November</option>
+												<option value="m12">Desember</option>								
+												</select>
+												</div>
+											</div>
+											<h3>Year</h3>
+												<div>
+												<select name="year" style="width:70px;">
+												<option value="">Select</option>
+												<option value="y1">2017</option>
+												<option value="y2">2018</option>
+												<option value="y3">2019</option>
+												<option value="y4">2010</option>
+												<option value="y5">2021</option>
+												<option value="y7">2022</option>										
+												</select>
 
 										</div>
 										<div class="col-md-8">
