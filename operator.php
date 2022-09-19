@@ -111,8 +111,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-12">
+							
 									<div class="panel panel-default">
 										<div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
 										<?php if ($error) { ?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } else if ($msg) { ?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>

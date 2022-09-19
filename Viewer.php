@@ -100,8 +100,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 		<?php include('./includes/leftbar.php'); ?>
 			<div class="content-wrapper">
 				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
+					
 							<div class="row">
 								<div class="col-md-12">
 									<div class="panel panel-default">
