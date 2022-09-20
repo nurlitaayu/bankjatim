@@ -54,60 +54,61 @@ $frequency = $_GET['frequency'] ?? [];
     <div class="ts-main-content">
         <?php include '../../includes/leftbar.php' ?>
         <div class="content-wrapper">
-        <div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-									<div class="panel panel-default">
-										<div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
-                                            <div class="container">
-                                                <h1>Laporan Unit Kerja</h1>
-                                                <div class="row" style="margin-top: 20px;">
-                                                    <div class="col-lg-4">
-                                                        <form action="" method="get">
-                                                            <div>
-                                                                <!-- Monthly -->
-                                                                <input type="checkbox" name="frequency[]" value="3" id="monthly" <?= in_array(3, $frequency) ? "checked" : '' ?>>
-                                                                <label for="monthly">Laporan Bulanan</label>
-                                                            </div>
-
-                                                            <div>
-                                                                <!-- Quarterly -->
-                                                                <input type="checkbox" name="frequency[]" value="2" id="quarterly" <?= in_array(2, $frequency) ? 'checked' : '' ?>>
-                                                                <label for="quarterly">Laporan Triwulan</label>
-                                                            </div>
-
-                                                            <div>
-                                                                <!-- Yearly -->
-                                                                <input type="checkbox" name="frequency[]" value="1" id="yearly" <?= in_array(1, $frequency) ? 'checked' : '' ?>>
-                                                                <label for="yearly">Laporan Tahunan</label>
-                                                            </div>
-
-
-                                                            <button type="submit">Cari</button>
-                                                        </form>
+            <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
+                                    <div class="container">
+                                        <h1>Laporan Unit Kerja</h1>
+                                        <div class="row" style="margin-top: 20px;">
+                                            <div class="col-lg-4">
+                                                <form action="" method="get">
+                                                    <div>
+                                                        <!-- Monthly -->
+                                                        <input type="checkbox" name="frequency[]" value="3" id="monthly" <?= in_array(3, $frequency) ? "checked" : '' ?>>
+                                                        <label for="monthly">Laporan Bulanan</label>
                                                     </div>
-
-                                                    <div class="col-lg-8">
-                                                        <table class="table table-hover table-border" id="dataTable">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>No.</th>
-                                                                    <th>Dokumen</th>
-                                                                    <th>Nama file</th>
-                                                                    <th>Tanggal</th>
-                                                                    <th>User Pengupload</th>
-                                                                    <th>Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                        </table>
-                                                    </div>
+                                                    
+                                                    <div>
+                                                    <!-- Quarterly -->
+                                                    <input type="checkbox" name="frequency[]" value="2" id="quarterly" <?= in_array(2, $frequency) ? 'checked' : '' ?>>
+                                                    <label for="quarterly">Laporan Triwulan</label>
                                                 </div>
-                                            </div>
+
+                                                <div>
+                                                    <!-- Yearly -->
+                                                    <input type="checkbox" name="frequency[]" value="1" id="yearly" <?= in_array(1, $frequency) ? 'checked' : '' ?>>
+                                                    <label for="yearly">Laporan Tahunan</label>
+                                                </div>
+
+
+                                                <button type="submit">Cari</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="col-lg-8">
+                                            <table class="table table-hover table-border" id="dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Dokumen</th>
+                                                        <th>Nama file</th>
+                                                        <th>Tanggal</th>
+                                                        <th>User Pengupload</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     <!-- Loading Scripts -->

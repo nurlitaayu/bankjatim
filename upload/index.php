@@ -87,18 +87,19 @@ $years = range(date('Y'), date('Y') - 5);
 											<select name="category_id" id="category" style="width:200px;">
 											</select>
 
-										</div>
-										<div class="col-md-8">
-											<h3>Upload File Report</h3>
-											<div class="form-group">
-												<label for="">File UPLOAD</label>
-												<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
-												<input type="file" name="myfile"></input>
 											</div>
-											<br>
-											<button type="submit" class="btn-danger btn-md" name="save">upload</button>
+											<div class="col-md-8">
+												<h3>Upload File Report</h3>
+												<div class="form-group">
+													<label for="">File Upload</label>
+													<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
+													<input type="file" name="myfile"></input>
+												</div>
+												<br>
+												<button type="submit" class="btn-danger btn-md" name="save">upload</button>
 										</div>
 									</form>
+									</div>
 								</div>
 							</div>
 						</div>
