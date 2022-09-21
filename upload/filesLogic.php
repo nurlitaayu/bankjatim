@@ -17,6 +17,8 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     $date = date('Y-m-d');
     $user = $_POST['user_id'];
     $categoryId = $_POST['category_id'];
+    $year = $_POST['year'];
+    $monthId = $_POST['month_id'];
 
 
     // name of the uploaded file
@@ -41,7 +43,7 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     } else {
         // move the uploaded (temporary) file to the specified destination
         if (move_uploaded_file($file, $destination)) {
-            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId')";
+            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id, year, month_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId', '$year', '$monthId')";
             if (mysqli_query($conn, $sql)) {
                 echo "File uploaded successfully";
             }

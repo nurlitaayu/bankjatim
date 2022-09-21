@@ -1,4 +1,9 @@
 <?php
+
+require_once __DIR__ . '/includes/config.php';
+
+$months = $dbh->query('SELECT * FROM months')->fetchAll(PDO::FETCH_ASSOC);
+
 $years = range(date('Y'), date('Y') - 5);
 ?>
 
@@ -57,28 +62,19 @@ $years = range(date('Y'), date('Y') - 5);
 												<div>
 													<h4>Tahun</h4>
 													<select name="year" style="width:70px;">
-														<option value="">Select</option>
+														<option name="year" value="">Select</option>
 														<?php foreach ($years as $year) { ?>
-															<option value="<?= $year ?>"><?= $year ?></option>
+															<option name="year" value="<?= $year ?>"><?= $year ?></option>
 														<?php } ?>
 													</select>
 												</div>
 												<div>
 													<h4>Bulan</h4>
-													<select name="month" style="width:70px;">
+													<select name="month_id" style="width:70px;">
 														<option value="">Select</option>
-														<option value="m1">Januari</option>
-														<option value="m2">Februari</option>
-														<option value="m3">Maret</option>
-														<option value="m4">April</option>
-														<option value="m5">Mei</option>
-														<option value="m6">Juni</option>
-														<option value="m7">Juli</option>
-														<option value="m8">Agustus</option>
-														<option value="m9">September</option>
-														<option value="m10">Oktober</option>
-														<option value="m11">November</option>
-														<option value="m12">Desember</option>
+														<?php foreach ($months as $month) { ?>
+															<option value="<?= $month['id'] ?>"><?= $month['name'] ?></option>
+														<?php } ?>
 													</select>
 												</div>
 											</div>
@@ -87,19 +83,18 @@ $years = range(date('Y'), date('Y') - 5);
 											<select name="category_id" id="category" style="width:200px;">
 											</select>
 
+										</div>
+										<div class="col-md-8">
+											<h3>Upload File Report</h3>
+											<div class="form-group">
+												<label for="">File Upload</label>
+												<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
+												<input type="file" name="myfile"></input>
 											</div>
-											<div class="col-md-8">
-												<h3>Upload File Report</h3>
-												<div class="form-group">
-													<label for="">File Upload</label>
-													<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
-													<input type="file" name="myfile"></input>
-												</div>
-												<br>
-												<button type="submit" class="btn-danger btn-md" name="save">upload</button>
+											<br>
+											<button type="submit" class="btn-danger btn-md" name="save">upload</button>
 										</div>
 									</form>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -107,6 +102,7 @@ $years = range(date('Y'), date('Y') - 5);
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 

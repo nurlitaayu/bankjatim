@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 17, 2022 at 11:52 AM
+-- Generation Time: Sep 21, 2022 at 09:58 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -130,7 +130,9 @@ CREATE TABLE `files` (
   `tanggal` date DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `category_id` int(1) DEFAULT NULL,
-  `approved` tinyint(1) NOT NULL DEFAULT 0
+  `approved` tinyint(1) NOT NULL DEFAULT 0,
+  `month_id` int(2) NOT NULL,
+  `year` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -152,6 +154,35 @@ INSERT INTO `frequencies` (`id`, `name`) VALUES
 (1, 'Laporan Tahunan'),
 (2, 'Laporan Triwulan'),
 (3, 'Laporan Bulanan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `months`
+--
+
+CREATE TABLE `months` (
+  `id` int(1) NOT NULL,
+  `name` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `months`
+--
+
+INSERT INTO `months` (`id`, `name`) VALUES
+(1, 'Januari'),
+(2, 'Februari'),
+(3, 'Maret'),
+(4, 'April'),
+(5, 'Mei'),
+(6, 'Juni'),
+(7, 'Juli'),
+(8, 'Agustus'),
+(9, 'September'),
+(10, 'Oktober'),
+(11, 'November'),
+(12, 'Desember');
 
 -- --------------------------------------------------------
 
@@ -258,12 +289,19 @@ ALTER TABLE `feedback`
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `category_id` (`category_id`) USING BTREE;
+  ADD KEY `category_id` (`category_id`) USING BTREE,
+  ADD KEY `files_month_fk` (`month_id`);
 
 --
 -- Indexes for table `frequencies`
 --
 ALTER TABLE `frequencies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `months`
+--
+ALTER TABLE `months`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -304,13 +342,19 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `frequencies`
 --
 ALTER TABLE `frequencies`
   MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `months`
+--
+ALTER TABLE `months`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -339,7 +383,8 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `files`
   ADD CONSTRAINT `files_category_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `files_month_fk` FOREIGN KEY (`month_id`) REFERENCES `months` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
