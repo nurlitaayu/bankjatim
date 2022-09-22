@@ -17,8 +17,8 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     $date = date('Y-m-d');
     $user = $_POST['user_id'];
     $categoryId = $_POST['category_id'];
-    $year = $_POST['year'];
-    $monthId = $_POST['month_id'];
+    $year = $_POST['year'] ?? 2022;
+    $monthId = $_POST['month_id'] ?? 1;
 
 
     // name of the uploaded file
