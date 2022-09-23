@@ -93,25 +93,8 @@ $years = range(date('Y'), date('Y') - 5);
 													<label for="monthly">Laporan Bulanan</label>
 												</div>
 
-												<div style="display: flex;">
-												<div>
-													<h4>Tahun</h4>
-													<select name="year" style="width:70px;">
-														<option name="year" value="">Select</option>
-														<?php foreach ($years as $year) { ?>
-															<option name="year" value="<?= $year ?>"><?= $year ?></option>
-														<?php } ?>
-													</select>
-												</div>
-												<div>
-													<h4>Bulan</h4>
-													<select name="month_id" style="width:70px;">
-														<option value="">Select</option>
-														<?php foreach ($months as $month) { ?>
-															<option value="<?= $month['id'] ?>"><?= $month['name'] ?></option>
-														<?php } ?>
-													</select>
-												</div>
+												<div id="selectContainer" style="display: flex;">
+
 											</div>
 
 												<h4>Nama Dokumen</h4>
@@ -154,8 +137,14 @@ $years = range(date('Y'), date('Y') - 5);
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
-	<script type="text/javascript">
-		var categories = <?= json_encode($categories) ?>
+	<script>
+		var categories = <?= json_encode($categories) ?>;
+		var months = <?= json_encode($months) ?>;
+		let years = [2022, 2021, 2020, 2019, 2018]
+
+		let yearSelect = years.map(year => `<option name="year" value="${year}">${year}</option>`).join(',')
+		let monthSelect = months.map(month => `<option name="month_id" value="${month['id']}">${month['name']}</option>`).join(',')
+
 
 		$(document).ready(function() {
 			setTimeout(function() {
@@ -166,7 +155,7 @@ $years = range(date('Y'), date('Y') - 5);
 			$("input[name='frequency_id']").change(() => {
 				$("#category").empty()
 				const id = $("input[name='frequency_id']:checked").val()
-				console.log(id)
+				
 				filtered = categories.filter(category => category.frequency_id == id)
 
 
@@ -174,8 +163,59 @@ $years = range(date('Y'), date('Y') - 5);
 					$("#category").append(`<option value="${cat.id}">${cat.name}</option>`)
 				});
 
-			})
+			
+				$('#selectContainer').empty()
 
+				if (id == 1) {
+					$('#selectContainer').append(
+						`<div>
+							<h4>Tahun</h4>
+							<select name="year" style="width:70px;">
+								<option name="year" value="">Select</option>
+								${yearSelect}
+                            </select>
+                        </div>`
+					)
+				} else if (id == 2) {
+					$('#selectContainer').append(
+						`
+						<div>
+							<h4>Tahun</h4>
+							<select name="year" style="width:70px;">
+								<option name="year" value="">Select</option>
+								${yearSelect}
+                            </select>
+                        </div>
+						<div>
+							<h4>Bulan</h4>
+							<select name="month_id" style="width:70px;">
+								<option value="">Select</option>
+								${monthSelect}
+                            </select>
+                        </div>`
+					)
+				} else if (id == 3) {
+					$('#selectContainer').append(
+						`
+						<div>
+							<h4>Tahun</h4>
+							<select name="year" style="width:70px;">
+								<option name="year" value="">Select</option>
+								${yearSelect}
+                            </select>
+                        </div>
+						<div>
+							<h4>Bulan</h4>
+							<select name="month_id" style="width:70px;">
+								<option value="">Select</option>
+								${monthSelect}
+                            </select>
+                        </div>`
+					)
+				}
+
+			})
+			
 		});
 	</script>
 </body>
