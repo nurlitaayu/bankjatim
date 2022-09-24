@@ -9,10 +9,9 @@ $result = $dbh->query($cQuery);
 $categories = $result->fetchAll(PDO::FETCH_ASSOC);
 // ----------
 
-$frequency = $_GET['frequency'] ?? [];
-$date = $_GET['date'] ?? '';
 $categoryId = $_GET['category_id'] ?? '';
 $files = null;
+
 
 $query = "SELECT c.name, f.tanggal, fr.name AS frequency, f.name AS doc_path 
 FROM files f  
@@ -22,23 +21,10 @@ INNER JOIN frequencies fr
 ON c.frequency_id = fr.id
 WHERE f.approved = true";
 
-if ($categoryId && $date) {
-    $query = $query .= " AND c.id = ? AND f.tanggal = ?";
-    $stmt = $dbh->prepare($query);
-    $stmt->execute([$categoryId, $date]);
-    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} elseif ($date) {
-    $query = $query .= " AND f.tanggal = ?";
-    $stmt = $dbh->prepare($query);
-    $stmt->execute([$date]);
-    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} elseif ($categoryId) {
+if ($categoryId) {
     $query = $query .= " AND c.id = ?";
     $stmt = $dbh->prepare($query);
     $stmt->execute([$categoryId]);
-    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} else {
-    $stmt = $dbh->query($query);
     $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -106,63 +92,61 @@ if ($categoryId && $date) {
         <?php include('../includes/leftbar.php'); ?>
         <div class="content-wrapper">
             <div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <h3 class="font-weight-bold">Kategori</h3>
-                                        <form action="" method="get">
-                                            <div>
-                                                <input type="radio" name="frequency_id" value="1" id="yearly">
-                                                <label for="yearly">Laporan Tahunan</label>
-                                            </div>
-
-                                            <div>
-                                                <input type="radio" name="frequency_id" value="2" id="quarterly">
-                                                <label for="quarterly">Laporan Triwulan</label>
-                                            </div>
-
-                                            <div>
-                                                <input type="radio" name="frequency_id" value="3" id="monthly">
-                                                <label for="monthly">Laporan Bulanan</label>
-                                            </div>
-
-                                            <h4>Nama Dokumen</h4>
-                                            <select name="category_id" id="category" style="width:200px;">
-                                            </select>
-
-                                            <div class="form-group">
-                                                <label for="date">Tanggal Publish</label>
-                                                <input type="date" name="date" value="<?= $date ?>" class="form-control">
-                                                <button type="submit" class="btn btn-primary">Cari</button>
-                                            </div>
-                                        </form>
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h3 class="font-weight-bold">Kategori</h3>
+                                    <form action="" method="get">
+                                        <div>
+                                            <input type="radio" name="frequency_id" value="1" id="yearly">
+                                            <label for="yearly">Laporan Tahunan</label>
                                         </div>
-                                        <div class="col-md-8">
-                                            <div class="list-group">
-                                                <?php foreach ($files as $key => $file) { ?>
-                                                    <a target="_blank" href="viewpdf.php?path=<?= HTTP_SERVER.'upload/uploads/planning/'.$file['doc_path'] ?>" class="list-group-item list-group-item-action">
-                                                        <div class="d-flex w-100 justify-content-between">
-                                                            <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['tanggal'] ?></h5>
-                                                            <small><?= $file['tanggal'] ?></small>
-                                                        </div>
-                                                        <small><?= $file['frequency'] ?></small>
-                                                    </a>
-                                                <?php } ?>
-                                    </div> 
+
+                                        <div>
+                                            <input type="radio" name="frequency_id" value="2" id="quarterly">
+                                            <label for="quarterly">Laporan Triwulan</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="frequency_id" value="3" id="monthly">
+                                            <label for="monthly">Laporan Bulanan</label>
+                                        </div>
+
+                                        <h4>Nama Dokumen</h4>
+                                        <select name="category_id" id="category" style="width:200px;">
+                                        </select>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Cari</button>
+                                        </div>
+                                    </form>
+
                                 </div>
+                                <div class="col-md-8">
+                                    <div class="list-group">
+                                        <?php foreach ($files as $key => $file) { ?>
+                                            <a target="_blank" href="viewpdf.php?path=<?= HTTP_SERVER . 'upload/uploads/planning/' . $file['doc_path'] ?>" class="list-group-item list-group-item-action">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['tanggal'] ?></h5>
+                                                    <small><?= $file['tanggal'] ?></small>
+                                                </div>
+                                                <small><?= $file['frequency'] ?></small>
+                                            </a>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
-           
+
     </div>
-    
+
 </body>
 
 <script src="./js/jquery.min.js"></script>
