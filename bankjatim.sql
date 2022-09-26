@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 21, 2022 at 09:58 AM
+-- Generation Time: Sep 26, 2022 at 04:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -131,7 +131,7 @@ CREATE TABLE `files` (
   `user_id` int(11) DEFAULT NULL,
   `category_id` int(1) DEFAULT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT 0,
-  `month_id` int(2) NOT NULL,
+  `month_id` int(2) DEFAULT NULL,
   `year` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
