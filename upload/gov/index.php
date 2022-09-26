@@ -75,7 +75,7 @@ $years = range(date('Y'), date('Y') - 5);
 							<div class="col-md-12">
 								<div class="panel panel-default">
 									<div style="font-size:20pt;" class="panel-heading"><?php echo htmlentities($_SESSION['SESSION_role']); ?></div>
-										<form action="index.php" method="post" enctype="multipart/form-data">
+									<form id="uploadFile" action="index.php" method="post" enctype="multipart/form-data">
 											<div class="col-md-4">
 												<h4>Kategori</h4>
 												<div>
@@ -110,7 +110,7 @@ $years = range(date('Y'), date('Y') - 5);
 												<input type="file" name="myfile"></input>
 											</div>
 											<br>
-											<button type="submit" class="btn-danger btn-md" name="save">upload</button>
+											<button id="uploadButton" type="button" class="btn-danger btn-md" name="save">upload</button>
 											</div>
 										</form>
 									
@@ -151,6 +151,28 @@ $years = range(date('Y'), date('Y') - 5);
 				$('.succWrap').slideUp("slow");
 			}, 3000);
 
+			$('#uploadButton').on('click', async (e) => {
+				e.preventDefault()
+
+				const year = $("select[name='year']").val()
+				const monthId = $("select[name='month_id']").val()
+				let result = null
+
+				if (monthId && year) {
+					result = await $.ajax(`/upload/check_file.php?year=${year}&month_id=${monthId}`)
+				} else if(year) {
+					result = await $.ajax(`/upload/check_file.php?year=${year}`)
+				} else {
+					return alert('Please choose category first')
+				}
+
+				if (result.count > 0) {
+					alert('(Testing) File already exists!!')
+				} else {
+					$('#uploadFile').submit()
+				}
+			})
+
 
 			$("input[name='frequency_id']").change(() => {
 				$("#category").empty()
@@ -182,7 +204,7 @@ $years = range(date('Y'), date('Y') - 5);
 						<div>
 							<h4>Tahun</h4>
 							<select name="year" style="width:70px;">
-								<option name="year" value="">Select</option>
+							<option value="">Select</option>
 								${yearSelect}
                             </select>
                         </div>

@@ -12,11 +12,13 @@ $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 // $user = session_name();
 
 // Uploads files
-if (isset($_POST['save'])) { // if save button on the form is clicked
+if ($_POST) { // if save button on the form is clicked
     $unit_kerja = 4;
     $date = date('Y-m-d');
     $user = $_POST['user_id'];
     $categoryId = $_POST['category_id'];
+    $year = $_POST['year'] ?? 2022;
+    $monthId = $_POST['month_id'] ?? null;
 
 
     // name of the uploaded file
@@ -34,6 +36,7 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     $file = $_FILES['myfile']['tmp_name'];
     $size = $_FILES['myfile']['size'];
 
+    
     if (!in_array($extension, ['zip', 'pdf', 'docx', 'xls'])) {
         echo "You file extension must be .zip, .pdf xls. or .docx";
     } elseif ($_FILES['myfile']['size'] > 5000000) { // file shouldn't be larger than 5Megabyte
@@ -41,7 +44,12 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
     } else {
         // move the uploaded (temporary) file to the specified destination
         if (move_uploaded_file($file, $destination)) {
-            $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId')";
+            if ($monthId) {
+                $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id, year, month_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId', '$year', '$monthId')";
+            } else {
+                $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id, year) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId', '$year')";
+            }
+
             if (mysqli_query($conn, $sql)) {
                 echo "File uploaded successfully";
             }
