@@ -47,11 +47,11 @@ $columns = array(
 
                 <form action="' . HTTP_SERVER . 'upload/supervisor/delete_file.php?id=' . $id . '" method="post">
                     <button type="submit">
-                        <i class="fa fa-trash" style="color:red"></i>
+                    <i class="fa fa-trash" style="color:red"></i> 
                     </button>
                 </form>
             </div>
-        ';
+        '; 
     })
 );
 

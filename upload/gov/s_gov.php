@@ -81,19 +81,17 @@ $frequency = $_GET['frequency'] ?? [];
                                                     <input type="checkbox" name="frequency[]" value="1" id="yearly" <?= in_array(1, $frequency) ? 'checked' : '' ?>>
                                                     <label for="yearly">Laporan Tahunan</label>
                                                 </div>
-
-
                                                 <button type="submit">Cari</button>
                                             </form>
-                                        </div>
-
-                                        <div class="col-lg-8">
-                                            <table class="table table-hover table-border" id="dataTable">
+                                        
+                                            </div>
+                                            <div class="col-lg-9">
+                                            <table class="display table table-striped table-bordered table-hover" id="dataTable" border="1">
                                                 <thead>
                                                     <tr>
                                                         <th>No.</th>
                                                         <th>Dokumen</th>
-                                                        <th>Nama file</th>
+                                                        <th>Nama File</th>
                                                         <th>Tanggal</th>
                                                         <th>User Pengupload</th>
                                                         <th>Action</th>
@@ -113,10 +111,16 @@ $frequency = $_GET['frequency'] ?? [];
 
     <!-- Loading Scripts -->
 
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <script type="text/javascript">
+    <script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
         $(document).ready(function() {
             setTimeout(function() {
                 $('.succWrap').slideUp("slow");
