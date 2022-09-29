@@ -19,6 +19,8 @@ if ($_POST) { // if save button on the form is clicked
     $categoryId = $_POST['category_id'];
     $year = $_POST['year'] ?? 2022;
     $monthId = $_POST['month_id'] ?? null;
+    $updateId = $_POST['update_id'] ?? null;
+    $rmFilename = $_POST['file_name'] ?? null;
 
 
     // name of the uploaded file
@@ -46,6 +48,9 @@ if ($_POST) { // if save button on the form is clicked
         if (move_uploaded_file($file, $destination)) {
             if ($monthId) {
                 $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id, year, month_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId', '$year', '$monthId')";
+            } else if ($updateId) {
+                unlink($_SERVER['DOCUMENT_ROOT'] . '/upload/uploads/gov/' . $rmFilename);
+                $sql = "UPDATE files SET name = '$filename', tanggal = '$date', user_id = '$user' WHERE id = '$updateId'";
             } else {
                 $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id, year) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId', '$year')";
             }

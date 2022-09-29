@@ -107,6 +107,8 @@ $years = range(date('Y'), date('Y') - 5);
 											<div class="form-group">
 												<label for="">File Upload</label>
 												<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
+												<input type="hidden" name="update_id">
+												<input type="hidden" name="file_name">
 												<input type="file" name="myfile"></input>
 											</div>
 											<br>
@@ -145,6 +147,8 @@ $years = range(date('Y'), date('Y') - 5);
 		let yearSelect = years.map(year => `<option name="year" value="${year}">${year}</option>`).join(',')
 		let monthSelect = months.map(month => `<option name="month_id" value="${month['id']}">${month['name']}</option>`).join(',')
 
+		const updateId = $("input[name='update_id']")
+		const filename = $("input[name='file_name']")
 
 		$(document).ready(function() {
 			setTimeout(function() {
@@ -156,18 +160,24 @@ $years = range(date('Y'), date('Y') - 5);
 
 				const year = $("select[name='year']").val()
 				const monthId = $("select[name='month_id']").val()
+				const categoryId = $("select[name='category_id']").val()
 				let result = null
 
-				if (monthId && year) {
-					result = await $.ajax(`/upload/check_file.php?year=${year}&month_id=${monthId}`)
-				} else if(year) {
-					result = await $.ajax(`/upload/check_file.php?year=${year}`)
+				if (monthId && year && categoryId) {
+					// Ganti work unit sesuai sama pilihan di database (1 -4)
+					result = await $.ajax(`/upload/check_file.php?year=${year}&month_id=${monthId}&category_id=${categoryId}&work_unit=3`)
+				} else if(year && categoryId) {
+					result = await $.ajax(`/upload/check_file.php?year=${year}&category_id=${categoryId}&work_unit=3`)
 				} else {
 					return alert('Please choose category first')
 				}
 
 				if (result.count > 0) {
-					alert('(Testing) File already exists!!')
+					if (confirm('File sudah ada, apakah anda ingin mengganti file tersebut?')) {
+						updateId.val(result.id)
+						filename.val(result.filename)
+						$('#uploadFile').submit()
+					}
 				} else {
 					$('#uploadFile').submit()
 				}
