@@ -50,7 +50,7 @@ if ($_POST) { // if save button on the form is clicked
                 $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id, year, month_id) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId', '$year', '$monthId')";
             } else if ($updateId) {
                 unlink($_SERVER['DOCUMENT_ROOT'] . '/upload/uploads/security/' . $rmFilename);
-                $sql = "UPDATE files SET name = '$filename', tanggal = '$date', user_id = '$user' WHERE id = '$updateId'";
+                $sql = "UPDATE files SET name = '$filename', tanggal = '$date', user_id = '$user', approved = false WHERE id = '$updateId'";
             } else {
                 $sql = "INSERT INTO files (unit_kerja, name, tanggal, user_id, category_id, year) VALUES ( '$unit_kerja', '$filename', '$date' ,  '$user', '$categoryId', '$year')";
             }
