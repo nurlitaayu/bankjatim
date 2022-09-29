@@ -106,6 +106,8 @@ $years = range(date('Y'), date('Y') - 5);
 													<div class="form-group">
 														<label for="">File Upload</label>
 														<input type="hidden" value="<?= $_SESSION['user_id'] ?>" name="user_id">
+														<input type="hidden" name="update_id">
+														<input type="hidden" name="file_name">
 														<input type="file" name="myfile"></input>
 											</div>
 											<br>
@@ -143,11 +145,41 @@ $years = range(date('Y'), date('Y') - 5);
 		let yearSelect = years.map(year => `<option name="year" value="${year}">${year}</option>`).join(',')
 		let monthSelect = months.map(month => `<option name="month_id" value="${month['id']}">${month['name']}</option>`).join(',')
 		
+		const updateId = $("input[name='update_id']")
+		const filename = $("input[name='file_name']")
 
 		$(document).ready(function() {
 			setTimeout(function() {
 				$('.succWrap').slideUp("slow");
 			}, 3000);
+
+			$('#uploadButton').on('click', async (e) => {
+				e.preventDefault()
+
+				const year = $("select[name='year']").val()
+				const monthId = $("select[name='month_id']").val()
+				const categoryId = $("select[name='category_id']").val()
+				let result = null
+
+				if (monthId && year && categoryId) {
+					// Ganti work unit sesuai sama pilihan di database (1 -4)
+					result = await $.ajax(`/upload/check_file.php?year=${year}&month_id=${monthId}&category_id=${categoryId}&work_unit=4`)
+				} else if(year && categoryId) {
+					result = await $.ajax(`/upload/check_file.php?year=${year}&category_id=${categoryId}&work_unit=4`)
+				} else {
+					return alert('Please choose category first')
+				}
+
+				if (result.count > 0) {
+					if (confirm('File sudah ada, apakah anda ingin mengganti file tersebut?')) {
+						updateId.val(result.id)
+						filename.val(result.filename)
+						$('#uploadFile').submit()
+					}
+				} else {
+					$('#uploadFile').submit()
+				}
+			})
 
 
 			$("input[name='frequency_id']").change(() => {
@@ -163,55 +195,55 @@ $years = range(date('Y'), date('Y') - 5);
 
 				$('#selectContainer').empty()
 
-if (id == 1) {
-	$('#selectContainer').append(
-		`<div>
-			<h4>Tahun</h4>
-			<select name="year" style="width:70px;">
-				<option name="year" value="">Select</option>
-				${yearSelect}
-			</select>
-		</div>`
-	)
-} else if (id == 2) {
-	$('#selectContainer').append(
-		`
-		<div>
-			<h4>Tahun</h4>
-			<select name="year" style="width:70px;">
-				<option name="year" value="">Select</option>
-				${yearSelect}
-			</select>
-		</div>
-		<div>
-			<h4>Bulan</h4>
-			<select name="month_id" style="width:70px;">
-				<option value="">Select</option>
-				${monthSelect}
-			</select>
-		</div>`
-	)
-} else if (id == 3) {
-	$('#selectContainer').append(
-		`
-		<div>
-			<h4>Tahun</h4>
-			<select name="year" style="width:70px;">
-				<option name="year" value="">Select</option>
-				${yearSelect}
-			</select>
-		</div>
-		<div>
-			<h4>Bulan</h4>
-			<select name="month_id" style="width:70px;">
-				<option value="">Select</option>
-				${monthSelect}
-			</select>
-		</div>`
-	)
-}
+				if (id == 1) {
+					$('#selectContainer').append(
+						`<div>
+							<h4>Tahun</h4>
+							<select name="year" style="width:70px;">
+								<option name="year" value="">Select</option>
+								${yearSelect}
+							</select>
+						</div>`
+					)
+				} else if (id == 2) {
+					$('#selectContainer').append(
+						`
+						<div>
+							<h4>Tahun</h4>
+							<select name="year" style="width:70px;">
+								<option name="year" value="">Select</option>
+								${yearSelect}
+							</select>
+						</div>
+						<div>
+							<h4>Bulan</h4>
+							<select name="month_id" style="width:70px;">
+								<option value="">Select</option>
+								${monthSelect}
+							</select>
+						</div>`
+					)
+				} else if (id == 3) {
+					$('#selectContainer').append(
+						`
+						<div>
+							<h4>Tahun</h4>
+							<select name="year" style="width:70px;">
+								<option name="year" value="">Select</option>
+								${yearSelect}
+							</select>
+						</div>
+						<div>
+							<h4>Bulan</h4>
+							<select name="month_id" style="width:70px;">
+								<option value="">Select</option>
+								${monthSelect}
+							</select>
+						</div>`
+					)
+				}
 
-})
+				})
 
 		});
 	</script>
