@@ -32,7 +32,9 @@ $primaryKey = 'id';
 // indexes
 $columns = array(
     array('db' => 'name', 'dt' => 1),
-    array('db' => 'docname', 'dt' => 2),
+    array('db' => 'docname', 'dt' => 2, 'formatter' => function ($file) {
+        return  '<a target="_blank" href="viewpdf.php?path='. HTTP_SERVER .'upload/uploads/planning/' . $file .'">'.$file.'</a>';
+    }),
     array('db' => 'tanggal', 'dt' => 3),
     array('db' => 'user_name', 'dt' => 4,),
     array('db' => 'id', 'dt' => 5, 'formatter' => function ($id) {
