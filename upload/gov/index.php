@@ -143,6 +143,8 @@ $years = range(date('Y'), date('Y') - 5);
 		var categories = <?= json_encode($categories) ?>;
 		var months = <?= json_encode($months) ?>;
 		let years = [2022, 2021, 2020, 2019, 2018]
+		const quarterMonths = [months[0], months[3], months[6], months[9]]
+
 
 		let yearSelect = years.map(year => `<option name="year" value="${year}">${year}</option>`).join(',')
 		let monthSelect = months.map(month => `<option name="month_id" value="${month['id']}">${month['name']}</option>`).join(',')
@@ -209,6 +211,9 @@ $years = range(date('Y'), date('Y') - 5);
                         </div>`
 					)
 				} else if (id == 2) {
+					let monthSelect = quarterMonths.map(month => `<option name="month_id" value="${month['id']}">${month['name']}</option>`).join(',')
+
+					
 					$('#selectContainer').append(
 						`
 						<div>
