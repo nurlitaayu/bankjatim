@@ -1,7 +1,7 @@
 <?php
 session_start();
 // connect to the database
-$conn = mysqli_connect('localhost', 'root', '', 'bankjatim');
+$conn = mysqli_connect('', 'root', '', 'bankjatim');
 
 $sql = "SELECT * FROM categories WHERE work_unit = 1";
 $result = mysqli_query($conn, $sql);

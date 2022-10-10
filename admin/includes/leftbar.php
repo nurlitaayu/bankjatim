@@ -14,6 +14,10 @@
 			</li>
 			<li><a href="download.php"><i class="fa fa-download"></i> Unduh Data User</a>
 			</li>
+			<li><a href="backup_data.php"><i class="fa fa-download"></i> Backup Data</a>
+			</li>
+			<li><a href="restore_data.php"><i class="fa fa-upload"></i> Restore Data</a>
+			</li>
 			</ul>
 		</nav>
 
