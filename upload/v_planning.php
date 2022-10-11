@@ -13,7 +13,7 @@ $categoryId = $_GET['category_id'] ?? '';
 $files = null;
 
 
-$query = "SELECT c.name, f.year, f.tanggal, fr.name AS frequency, f.name AS doc_path 
+$query = "SELECT f.name, f.year, f.tanggal, fr.name AS frequency, f.name AS doc_path 
 FROM files f  
 INNER JOIN categories c 
 ON f.category_id = c.id

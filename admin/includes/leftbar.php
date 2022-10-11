@@ -14,9 +14,12 @@
 			</li>
 			<li><a href="download.php"><i class="fa fa-download"></i> Unduh Data User</a>
 			</li>
-			<li><a href="backup_data.php"><i class="fa fa-download"></i> Backup Data</a>
-			</li>
-			<li><a href="restore_data.php"><i class="fa fa-upload"></i> Restore Data</a>
+			<li class=" ts-account">
+			<a style="background:#c9c8c5; color:black;" href="#"><i class="fa fa-cog"></i> &nbsp;Backup Restore Data</a>
+			<ul>
+				<li><a href="backup_data.php"><i class="fa fa-download"></i>Backup Data</a></li>
+				<li><a href="restore_data.php"><i class="fa fa-upload"></i>Restore Data</a></li>
+			</ul>
 			</li>
 			</ul>
 		</nav>
