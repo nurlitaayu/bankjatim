@@ -19,7 +19,7 @@ INNER JOIN categories c
 ON f.category_id = c.id
 INNER JOIN frequencies fr
 ON c.frequency_id = fr.id
-INNER JOIN months m
+LEFT JOIN months m
 ON f.month_id = m.id
 WHERE f.approved = true";
 
@@ -132,7 +132,7 @@ if ($categoryId) {
                                         <?php foreach ($files as $key => $file) { ?>
                                             <a target="_blank" href="viewpdf.php?path=<?= HTTP_SERVER . 'upload/uploads/planning/' . $file['doc_path'] ?>" class="list-group-item list-group-item-action">
                                                 <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['month'] ?> - <?= $file['year'] ?></h5>
+                                                    <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['month'] == null ? '' : $file['month'] . ' - '  ?><?= $file['year'] ?></h5>
                                                     <small><?= $file['tanggal'] ?></small>
                                                 </div>
                                                 <small><?= $file['frequency'] ?></small>
