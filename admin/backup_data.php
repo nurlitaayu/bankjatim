@@ -74,7 +74,7 @@ if ($_POST) {
 									<div class="panel-heading">Backup Data</div>
 									<div class="panel-body">
 										<form method="post">
-											<button type="submit" name="backup">Backup</button>
+											<button type="submit" name="backup" class="btn btn-danger">Backup</button>
 										</form>
 									</div>
 								</div>
