@@ -10,15 +10,17 @@ $categories = $result->fetchAll(PDO::FETCH_ASSOC);
 // ----------
 
 $categoryId = $_GET['category_id'] ?? '';
-$files = null;
+$files = [];
 
 
-$query = "SELECT c.name, f.tanggal, fr.name AS frequency, f.name AS doc_path 
+$query = "SELECT f.name, f.year, f.tanggal, fr.name AS frequency, m.name AS month, f.name AS doc_path 
 FROM files f  
 INNER JOIN categories c 
 ON f.category_id = c.id
 INNER JOIN frequencies fr
 ON c.frequency_id = fr.id
+LEFT JOIN months m
+ON f.month_id = m.id
 WHERE f.approved = true";
 
 if ($categoryId) {
@@ -130,7 +132,7 @@ if ($categoryId) {
                                         <?php foreach ($files as $key => $file) { ?>
                                             <a target="_blank" href="viewpdf.php?path=<?= HTTP_SERVER . 'upload/uploads/pmo/' . $file['doc_path'] ?>" class="list-group-item list-group-item-action">
                                                 <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['tanggal'] ?></h5>
+                                                <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['month'] == null ? '' : $file['month'] . ' - '  ?><?= $file['year'] ?></h5>
                                                     <small><?= $file['tanggal'] ?></small>
                                                 </div>
                                                 <small><?= $file['frequency'] ?></small>
