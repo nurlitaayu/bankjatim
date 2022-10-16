@@ -13,11 +13,9 @@ $role =  $_SESSION['SESSION_role'];
 		<li>
 			<a href="http://localhost:8000/notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
 		</li>
-		<li>
-			<a href="http://localhost:8000/messages.php"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
-		</li>
+
 		<li class=" ts-account">
-			<a style="background:#c9c8c5; color:black;" href="#"> &nbsp;Unit Kerja</a>
+			<a style="background:#c9c8c5; color:black;" href="#"><i class="fa fa-building"></i> &nbsp;Unit Kerja</a>
 			<ul>
 				<?php if ($role == 'Operator') { ?>
 

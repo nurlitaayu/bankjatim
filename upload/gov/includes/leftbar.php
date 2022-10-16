@@ -7,9 +7,9 @@
 			</li>
 			<li><a href="../../notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
 			</li>
-			<li><a href="../../messages.php"><i class="fa fa-envelope"></i> &nbsp;Messages</a>
+
 			<li  class=" ts-account">
-				<a style="background:#c9c8c5; color:black;" href="#"> &nbsp;Unit Kerja</a>
+				<a style="background:#c9c8c5; color:black;" href="#"><i class="fa fa-building"></i> &nbsp;Unit Kerja</a>
 				<ul>
 					<li  ><a href="../index.php" style="background:#ff4040;">Planning</a></li>
 					<li ><a href="../pmo/index.php" style="background:#ff4040;">PMO</a></li>
