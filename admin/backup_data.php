@@ -1,13 +1,12 @@
 <?php
-require '../vendor/autoload.php';
+require_once './backup_script.php';
 
-use Coderatio\SimpleBackup\SimpleBackup;
 
 session_start();
 include('includes/config.php');
 
 if ($_POST) {
-	$simpleBackup = SimpleBackup::setDatabase(['bankjatim', 'root', '', 'localhost'])->downloadAfterExport();
+	backupSQL();
 }
 
 ?>
