@@ -4,9 +4,7 @@
 		<li><a href="../../profile.php"><i class="fa fa-user"></i> &nbsp;Profile</a>
 		</li>
 
-		</li>
-		<li><a href="../../notification.php"><i class="fa fa-bell"></i> &nbsp;Notification<sup style="color:red">*</sup></a>
-		</li>
+		
 
 		<li class=" ts-account">
 			<a style="background:#c9c8c5; color:black;" href="#"><i class="fa fa-building"></i> &nbsp;Unit Kerja</a>
