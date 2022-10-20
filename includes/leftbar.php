@@ -26,7 +26,7 @@ $role =  $_SESSION['SESSION_role'];
 
 				<?php } elseif ($role == 'Supervisor') { ?>
 
-					<li><a href="http://localhost/bankjatim0/upload/s_planning.php" style="background:#ff4040;">Planning</a></li>
+					<li><a href="http://localhost/bankjatim/upload/s_planning.php" style="background:#ff4040;">Planning</a></li>
 					<li><a href="http://localhost/bankjatim/upload/pmo/s_pmo.php" style="background:#ff4040;">PMO</a></li>
 					<li><a href="http://localhost/bankjatim/upload/gov/s_gov.php" style="background:#ff4040;">GOV</a></li>
 					<li><a href="http://localhost/bankjatim/upload/security/s_security.php" style="background:#ff4040;">Security</a></li>
