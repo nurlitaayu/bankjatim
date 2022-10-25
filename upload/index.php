@@ -131,11 +131,11 @@ $years = range(date('Y'), date('Y') - 5);
 
 				if (monthId && year && categoryId) {
 					// Ganti work unit sesuai sama pilihan di database (1 -4)
-					result = await $.ajax(`/upload/check_file.php?year=${year}&month_id=${monthId}&category_id=${categoryId}&work_unit=1`)
+					result = await $.ajax(`/bankjatim/upload/check_file.php?year=${year}&month_id=${monthId}&category_id=${categoryId}&work_unit=1`)
 				} else if(year && categoryId) {
-					result = await $.ajax(`/upload/check_file.php?year=${year}&category_id=${categoryId}&work_unit=1`)
+					result = await $.ajax(`/bankjatim/upload/check_file.php?year=${year}&category_id=${categoryId}&work_unit=1`)
 				} else {
-					return alert('Please choose category first')
+					return alert('Please choose category first')  
 				}
 
 				if (result.count > 0) {
@@ -144,7 +144,7 @@ $years = range(date('Y'), date('Y') - 5);
 						filename.val(result.filename)
 						$('#uploadFile').submit()
 					}
-				} else {
+				} else { 
 					$('#uploadFile').submit()
 				}
 			})
@@ -153,9 +153,7 @@ $years = range(date('Y'), date('Y') - 5);
 			$("input[name='frequency_id']").change(() => {
 				$("#category").empty()
 				const id = $("input[name='frequency_id']:checked").val()
-
 				filtered = categories.filter(category => category.frequency_id == id)
-
 				filtered.forEach(cat => {
 					$("#category").append(`<option value="${cat.id}">${cat.name}</option>`)
 				});
@@ -170,12 +168,10 @@ $years = range(date('Y'), date('Y') - 5);
 								<option name="year" value="">Select</option>
 								${yearSelect}
                             </select>
-                        </div>`
+                        </div>` 
 					)
 				} else if (id == 2) {
 					let monthSelect = quarterMonths.map(month => `<option name="month_id" value="${month['id']}">${month['name']}</option>`).join(',')
-
-
 					$('#selectContainer').append(
 						`
 						<div>
@@ -210,12 +206,10 @@ $years = range(date('Y'), date('Y') - 5);
 								${monthSelect}
                             </select>
                         </div>`
-					)
-				}
-
+					)				
+			}
 			})
 		});
 	</script>
 </body>
-
 </html>

@@ -209,11 +209,8 @@ if (id == 1) {
 	)
 } else if (id == 2) {
 	let monthSelect = quarterMonths.map(month => `<option name="month_id" value="${month['id']}">${month['name']}</option>`).join(',')
-
-	
 	$('#selectContainer').append(
-		`
-		<div>
+		`<div>
 			<h4>Tahun</h4>
 			<select name="year" style="width:70px;">
 			<option value="">Select</option>
