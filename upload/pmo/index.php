@@ -166,9 +166,9 @@ $years = range(date('Y'), date('Y') - 5);
 
 				if (monthId && year && categoryId) {
 					// Ganti work unit sesuai sama pilihan di database (1 -4)
-					result = await $.ajax(`/upload/check_file.php?year=${year}&month_id=${monthId}&category_id=${categoryId}&work_unit=2`)
+					result = await $.ajax(`/bankjatim/upload/check_file.php?year=${year}&month_id=${monthId}&category_id=${categoryId}&work_unit=2`)
 				} else if(year && categoryId) {
-					result = await $.ajax(`/upload/check_file.php?year=${year}&category_id=${categoryId}&work_unit=2`)
+					result = await $.ajax(`/bankjatim/upload/check_file.php?year=${year}&category_id=${categoryId}&work_unit=2`)
 				} else {
 					return alert('Please choose category first')
 				}

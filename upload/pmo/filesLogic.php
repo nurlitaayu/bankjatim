@@ -28,7 +28,7 @@ if ($_POST) { // if save button on the form is clicked
 
 
 
-    $destination = $_SERVER['DOCUMENT_ROOT'] . '/upload/uploads/planning/' . $filename;
+    $destination = $_SERVER['DOCUMENT_ROOT'] . '/bankjatim/upload/uploads/planning/' . $filename;
 
 
     // get the file extension
