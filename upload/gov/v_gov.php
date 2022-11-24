@@ -121,7 +121,7 @@ if ($categoryId) {
                                 <div class="col-md-8">
                                     <div class="list-group">
                                         <?php foreach ($files as $key => $file) { ?>
-                                            <a target="_blank" href="viewpdf.php?path=<?= HTTP_SERVER . 'upload/uploads/gov/' . $file['doc_path'] ?>" class="list-group-item list-group-item-action">
+                                            <a target="_blank" href="../viewpdf.php?path=<?= HTTP_SERVER . 'upload/uploads/planning/' . $file['doc_path'] ?>" class="list-group-item list-group-item-action">
                                                 <div class="d-flex w-100 justify-content-between">
                                                     <h5 class="mb-1"><?= $file['name'] ?> - <?= $file['month'] == null ? '' : $file['month'] . ' - '  ?><?= $file['year'] ?></h5>
                                                     <small><?= $file['tanggal'] ?></small>
