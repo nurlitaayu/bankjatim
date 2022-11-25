@@ -33,7 +33,7 @@ $primaryKey = 'id';
 $columns = array(
     array('db' => 'name', 'dt' => 1),
     array('db' => 'docname', 'dt' => 2, 'formatter' => function ($file) {
-        return  '<a target="_blank" href="viewpdf.php?path='. HTTP_SERVER .'upload/uploads/planning/' . $file .'">'.$file.'</a>';
+        return  '<a target="_blank" href="../viewpdf.php?path='. HTTP_SERVER .'upload/uploads/planning/' . $file .'">'.$file.'</a>';
     }),
     array('db' => 'tanggal', 'dt' => 3),
     array('db' => 'user_name', 'dt' => 4,),
